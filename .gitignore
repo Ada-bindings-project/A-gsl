@@ -1,0 +1,8 @@
+*.cgpr
+*.o
+*.ali
+*.stderr
+*.stdout
+*-loc.xml
+*.cswi
+messages.txt
