@@ -8,6 +8,38 @@ limited with GSL.Low_Level.gsl_gsl_matrix_double_h;
 
 package GSL.Low_Level.gsl_gsl_bspline_h is
 
+  -- bspline/gsl_bspline.h
+  -- *
+  -- * Copyright (C) 2006 Patrick Alken
+  -- * Copyright (C) 2008 Rhys Ulerich
+  -- *
+  -- * This program is free software; you can redistribute it and/or modify
+  -- * it under the terms of the GNU General Public License as published by
+  -- * the Free Software Foundation; either version 3 of the License, or (at
+  -- * your option) any later version.
+  -- *
+  -- * This program is distributed in the hope that it will be useful, but
+  -- * WITHOUT ANY WARRANTY; without even the implied warranty of
+  -- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+  -- * General Public License for more details.
+  -- *
+  -- * You should have received a copy of the GNU General Public License
+  -- * along with this program; if not, write to the Free Software
+  -- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
+  --  
+
+  -- spline order  
+  -- k - 1 (polynomial order)  
+  -- number of polynomial pieces on interval  
+  -- number of breakpoints (l + 1)  
+  -- number of bspline basis functions (l + k - 1)  
+  -- knots vector  
+  -- left delta  
+  -- right delta  
+  -- temporary spline results  
+  -- bspline derivative parameters  
+  -- work matrix  
+  -- temporary derivative results  
    type gsl_bspline_workspace is record
       k : aliased size_t;  -- /usr/include/gsl/gsl_bspline.h:43
       km1 : aliased size_t;  -- /usr/include/gsl/gsl_bspline.h:44

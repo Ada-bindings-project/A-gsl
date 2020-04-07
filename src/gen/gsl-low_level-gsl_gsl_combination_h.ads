@@ -8,6 +8,26 @@ with Interfaces.C.Strings;
 
 package GSL.Low_Level.gsl_gsl_combination_h is
 
+  -- combination/gsl_combination.h
+  -- * based on permutation/gsl_permutation.h by Brian Gough
+  -- * 
+  -- * Copyright (C) 2001 Szymon Jaroszewicz
+  -- * 
+  -- * This program is free software; you can redistribute it and/or modify
+  -- * it under the terms of the GNU General Public License as published by
+  -- * the Free Software Foundation; either version 3 of the License, or (at
+  -- * your option) any later version.
+  -- * 
+  -- * This program is distributed in the hope that it will be useful, but
+  -- * WITHOUT ANY WARRANTY; without even the implied warranty of
+  -- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+  -- * General Public License for more details.
+  -- * 
+  -- * You should have received a copy of the GNU General Public License
+  -- * along with this program; if not, write to the Free Software
+  -- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
+  --  
+
    type gsl_combination_struct is record
       n : aliased size_t;  -- /usr/include/gsl/gsl_combination.h:44
       k : aliased size_t;  -- /usr/include/gsl/gsl_combination.h:45
@@ -105,4 +125,5 @@ package GSL.Low_Level.gsl_gsl_combination_h is
         Convention => C, 
         External_Name => "gsl_combination_get";
 
+  -- size_t is unsigned, can't be negative  
 end GSL.Low_Level.gsl_gsl_combination_h;

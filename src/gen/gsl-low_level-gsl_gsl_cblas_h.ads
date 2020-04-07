@@ -9,6 +9,33 @@ with Interfaces.C.Strings;
 package GSL.Low_Level.gsl_gsl_cblas_h is
 
    --  unsupported macro: CBLAS_INDEX size_t
+  -- blas/gsl_cblas.h
+  -- * 
+  -- * Copyright (C) 1996, 1997, 1998, 1999, 2000 Gerard Jungman
+  -- * 
+  -- * This program is free software; you can redistribute it and/or modify
+  -- * it under the terms of the GNU General Public License as published by
+  -- * the Free Software Foundation; either version 3 of the License, or (at
+  -- * your option) any later version.
+  -- * 
+  -- * This program is distributed in the hope that it will be useful, but
+  -- * WITHOUT ANY WARRANTY; without even the implied warranty of
+  -- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+  -- * General Public License for more details.
+  -- * 
+  -- * You should have received a copy of the GNU General Public License
+  -- * along with this program; if not, write to the Free Software
+  -- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
+  --  
+
+  -- This is a copy of the CBLAS standard header.
+  -- * We carry this around so we do not have to
+  -- * break our model for flexible BLAS functionality.
+  --  
+
+  -- * Enumerated and derived types
+  --  
+
    subtype CBLAS_ORDER is unsigned;
    CblasRowMajor : constant unsigned := 101;
    CblasColMajor : constant unsigned := 102;  -- /usr/include/gsl/gsl_cblas.h:46
@@ -29,6 +56,11 @@ package GSL.Low_Level.gsl_gsl_cblas_h is
    subtype CBLAS_SIDE is unsigned;
    CblasLeft : constant unsigned := 141;
    CblasRight : constant unsigned := 142;  -- /usr/include/gsl/gsl_cblas.h:50
+
+  -- * ===========================================================================
+  -- * Prototypes for level 1 BLAS functions (complex are recast as routines)
+  -- * ===========================================================================
+  --  
 
    function cblas_sdsdot
      (N : int;
@@ -70,6 +102,9 @@ package GSL.Low_Level.gsl_gsl_cblas_h is
    with Import => True, 
         Convention => C, 
         External_Name => "cblas_ddot";
+
+  -- * Functions having prefixes Z and C only
+  --  
 
    procedure cblas_cdotu_sub
      (N : int;
@@ -114,6 +149,9 @@ package GSL.Low_Level.gsl_gsl_cblas_h is
    with Import => True, 
         Convention => C, 
         External_Name => "cblas_zdotc_sub";
+
+  -- * Functions having prefixes S D SC DZ
+  --  
 
    function cblas_snrm2
      (N : int;
@@ -179,6 +217,9 @@ package GSL.Low_Level.gsl_gsl_cblas_h is
         Convention => C, 
         External_Name => "cblas_dzasum";
 
+  -- * Functions having standard 4 prefixes (S D C Z)
+  --  
+
    function cblas_isamax
      (N : int;
       X : access float;
@@ -210,6 +251,15 @@ package GSL.Low_Level.gsl_gsl_cblas_h is
    with Import => True, 
         Convention => C, 
         External_Name => "cblas_izamax";
+
+  -- * ===========================================================================
+  -- * Prototypes for level 1 BLAS routines
+  -- * ===========================================================================
+  --  
+
+  -- 
+  -- * Routines with standard 4 prefixes (s, d, c, z)
+  --  
 
    procedure cblas_sswap
      (N : int;
@@ -335,6 +385,10 @@ package GSL.Low_Level.gsl_gsl_cblas_h is
         Convention => C, 
         External_Name => "cblas_zaxpy";
 
+  -- 
+  -- * Routines with S and D prefix only
+  --  
+
    procedure cblas_srotg
      (a : access float;
       b : access float;
@@ -419,6 +473,10 @@ package GSL.Low_Level.gsl_gsl_cblas_h is
         Convention => C, 
         External_Name => "cblas_drotm";
 
+  -- 
+  -- * Routines with S D C Z CS and ZD prefixes
+  --  
+
    procedure cblas_sscal
      (N : int;
       alpha : float;
@@ -472,6 +530,15 @@ package GSL.Low_Level.gsl_gsl_cblas_h is
    with Import => True, 
         Convention => C, 
         External_Name => "cblas_zdscal";
+
+  -- * ===========================================================================
+  -- * Prototypes for level 2 BLAS
+  -- * ===========================================================================
+  --  
+
+  -- 
+  -- * Routines with standard 4 prefixes (S, D, C, Z)
+  --  
 
    procedure cblas_sgemv
      (order : CBLAS_ORDER;
@@ -953,6 +1020,10 @@ package GSL.Low_Level.gsl_gsl_cblas_h is
         Convention => C, 
         External_Name => "cblas_ztpsv";
 
+  -- 
+  -- * Routines with S and D prefixes only
+  --  
+
    procedure cblas_ssymv
      (order : CBLAS_ORDER;
       Uplo : CBLAS_UPLO;
@@ -1186,6 +1257,10 @@ package GSL.Low_Level.gsl_gsl_cblas_h is
    with Import => True, 
         Convention => C, 
         External_Name => "cblas_dspr2";
+
+  -- 
+  -- * Routines with C and Z prefixes only
+  --  
 
    procedure cblas_chemv
      (order : CBLAS_ORDER;
@@ -1450,6 +1525,15 @@ package GSL.Low_Level.gsl_gsl_cblas_h is
    with Import => True, 
         Convention => C, 
         External_Name => "cblas_zhpr2";
+
+  -- * ===========================================================================
+  -- * Prototypes for level 3 BLAS
+  -- * ===========================================================================
+  --  
+
+  -- 
+  -- * Routines with standard 4 prefixes (S, D, C, Z)
+  --  
 
    procedure cblas_sgemm
      (Order : CBLAS_ORDER;
@@ -1870,6 +1954,10 @@ package GSL.Low_Level.gsl_gsl_cblas_h is
    with Import => True, 
         Convention => C, 
         External_Name => "cblas_ztrsm";
+
+  -- 
+  -- * Routines with prefixes C and Z only
+  --  
 
    procedure cblas_chemm
      (Order : CBLAS_ORDER;

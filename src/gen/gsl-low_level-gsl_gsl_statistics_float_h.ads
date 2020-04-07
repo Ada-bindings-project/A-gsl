@@ -6,6 +6,25 @@ with Interfaces.C; use Interfaces.C;
 
 package GSL.Low_Level.gsl_gsl_statistics_float_h is
 
+  -- statistics/gsl_statistics_float.h
+  -- * 
+  -- * Copyright (C) 1996, 1997, 1998, 1999, 2000, 2007 Jim Davies, Brian Gough
+  -- * 
+  -- * This program is free software; you can redistribute it and/or modify
+  -- * it under the terms of the GNU General Public License as published by
+  -- * the Free Software Foundation; either version 3 of the License, or (at
+  -- * your option) any later version.
+  -- * 
+  -- * This program is distributed in the hope that it will be useful, but
+  -- * WITHOUT ANY WARRANTY; without even the implied warranty of
+  -- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+  -- * General Public License for more details.
+  -- * 
+  -- * You should have received a copy of the GNU General Public License
+  -- * along with this program; if not, write to the Free Software
+  -- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
+  --  
+
    function gsl_stats_float_mean
      (data : access float;
       stride : size_t;
@@ -196,6 +215,7 @@ package GSL.Low_Level.gsl_gsl_statistics_float_h is
         Convention => C, 
         External_Name => "gsl_stats_float_covariance_m";
 
+  -- DEFINED FOR FLOATING POINT TYPES ONLY  
    function gsl_stats_float_wmean
      (w : access float;
       wstride : size_t;
@@ -356,6 +376,7 @@ package GSL.Low_Level.gsl_gsl_statistics_float_h is
         Convention => C, 
         External_Name => "gsl_stats_float_wkurtosis_m_sd";
 
+  -- END OF FLOATING POINT TYPES  
    function gsl_stats_float_pvariance
      (data1 : access float;
       stride1 : size_t;

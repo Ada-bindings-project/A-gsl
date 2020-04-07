@@ -10,6 +10,26 @@ limited with GSL.Low_Level.gsl_gsl_vector_double_h;
 
 package GSL.Low_Level.gsl_gsl_multilarge_h is
 
+  -- gsl_multilarge.h
+  -- * 
+  -- * Copyright (C) 2015 Patrick Alken
+  -- * 
+  -- * This program is free software; you can redistribute it and/or modify
+  -- * it under the terms of the GNU General Public License as published by
+  -- * the Free Software Foundation; either version 3 of the License, or (at
+  -- * your option) any later version.
+  -- * 
+  -- * This program is distributed in the hope that it will be useful, but
+  -- * WITHOUT ANY WARRANTY; without even the implied warranty of
+  -- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+  -- * General Public License for more details.
+  -- * 
+  -- * You should have received a copy of the GNU General Public License
+  -- * along with this program; if not, write to the Free Software
+  -- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
+  --  
+
+  -- iteration solver type  
    type gsl_multilarge_linear_type is record
       name : Interfaces.C.Strings.chars_ptr;  -- /usr/include/gsl/gsl_multilarge.h:43
       alloc : access function (arg1 : size_t) return System.Address;  -- /usr/include/gsl/gsl_multilarge.h:44
@@ -41,6 +61,7 @@ package GSL.Low_Level.gsl_gsl_multilarge_h is
    end record
    with Convention => C_Pass_By_Copy;  -- /usr/include/gsl/gsl_multilarge.h:61
 
+  -- available types  
    gsl_multilarge_linear_normal : access constant gsl_multilarge_linear_type  -- /usr/include/gsl/gsl_multilarge.h:64
    with Import => True, 
         Convention => C, 
@@ -50,6 +71,9 @@ package GSL.Low_Level.gsl_gsl_multilarge_h is
    with Import => True, 
         Convention => C, 
         External_Name => "gsl_multilarge_linear_tsqr";
+
+  -- * Prototypes
+  --  
 
    function gsl_multilarge_linear_alloc (arg1 : access constant gsl_multilarge_linear_type; arg2 : size_t) return access gsl_multilarge_linear_workspace  -- /usr/include/gsl/gsl_multilarge.h:71
    with Import => True, 

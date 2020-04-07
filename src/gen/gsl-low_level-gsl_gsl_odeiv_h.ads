@@ -16,6 +16,44 @@ package GSL.Low_Level.gsl_gsl_odeiv_h is
    GSL_ODEIV_HADJ_NIL : constant := 0;  --  /usr/include/gsl/gsl_odeiv.h:167
    GSL_ODEIV_HADJ_DEC : constant := (-1);  --  /usr/include/gsl/gsl_odeiv.h:168
 
+  -- ode-initval/gsl_odeiv.h
+  -- * 
+  -- * Copyright (C) 1996, 1997, 1998, 1999, 2000 Gerard Jungman
+  -- * 
+  -- * This program is free software; you can redistribute it and/or modify
+  -- * it under the terms of the GNU General Public License as published by
+  -- * the Free Software Foundation; either version 3 of the License, or (at
+  -- * your option) any later version.
+  -- * 
+  -- * This program is distributed in the hope that it will be useful, but
+  -- * WITHOUT ANY WARRANTY; without even the implied warranty of
+  -- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+  -- * General Public License for more details.
+  -- * 
+  -- * You should have received a copy of the GNU General Public License
+  -- * along with this program; if not, write to the Free Software
+  -- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
+  --  
+
+  -- Author:  G. Jungman
+  --  
+
+  -- Description of a system of ODEs.
+  -- *
+  -- * y' = f(t,y) = dydt(t, y)
+  -- *
+  -- * The system is specified by giving the right-hand-side
+  -- * of the equation and possibly a jacobian function.
+  -- *
+  -- * Some methods require the jacobian function, which calculates
+  -- * the matrix dfdy and the vector dfdt. The matrix dfdy conforms
+  -- * to the GSL standard, being a continuous range of floating point
+  -- * values, in row-order.
+  -- *
+  -- * As with GSL function objects, user-supplied parameter
+  -- * data is also present. 
+  --  
+
    type gsl_odeiv_system is record
       c_function : access function
            (arg1 : double;
@@ -32,6 +70,13 @@ package GSL.Low_Level.gsl_gsl_odeiv_h is
       params : System.Address;  -- /usr/include/gsl/gsl_odeiv.h:63
    end record
    with Convention => C_Pass_By_Copy;  -- /usr/include/gsl/gsl_odeiv.h:65
+
+  -- General stepper object.
+  -- *
+  -- * Opaque object for stepping an ODE system from t to t+h.
+  -- * In general the object has some state which facilitates
+  -- * iterating the stepping operation.
+  --  
 
    type gsl_odeiv_step_type is record
       name : Interfaces.C.Strings.chars_ptr;  -- /usr/include/gsl/gsl_odeiv.h:80
@@ -60,6 +105,18 @@ package GSL.Low_Level.gsl_gsl_odeiv_h is
       state : System.Address;  -- /usr/include/gsl/gsl_odeiv.h:94
    end record
    with Convention => C_Pass_By_Copy;  -- /usr/include/gsl/gsl_odeiv.h:96
+
+  -- Available stepper types.
+  -- *
+  -- * rk2    : embedded 2nd(3rd) Runge-Kutta
+  -- * rk4    : 4th order (classical) Runge-Kutta
+  -- * rkck   : embedded 4th(5th) Runge-Kutta, Cash-Karp
+  -- * rk8pd  : embedded 8th(9th) Runge-Kutta, Prince-Dormand
+  -- * rk2imp : implicit 2nd order Runge-Kutta at Gaussian points
+  -- * rk4imp : implicit 4th order Runge-Kutta at Gaussian points
+  -- * gear1  : M=1 implicit Gear method
+  -- * gear2  : M=2 implicit Gear method
+  --  
 
    gsl_odeiv_step_rk2 : access constant gsl_odeiv_step_type  -- /usr/include/gsl/gsl_odeiv.h:111
    with Import => True, 
@@ -116,6 +173,9 @@ package GSL.Low_Level.gsl_gsl_odeiv_h is
         Convention => C, 
         External_Name => "gsl_odeiv_step_gear2";
 
+  -- Constructor for specialized stepper objects.
+  --  
+
    function gsl_odeiv_step_alloc (arg1 : access constant gsl_odeiv_step_type; arg2 : size_t) return access gsl_odeiv_step  -- /usr/include/gsl/gsl_odeiv.h:126
    with Import => True, 
         Convention => C, 
@@ -130,6 +190,9 @@ package GSL.Low_Level.gsl_gsl_odeiv_h is
    with Import => True, 
         Convention => C, 
         External_Name => "gsl_odeiv_step_free";
+
+  -- General stepper object methods.
+  --  
 
    function gsl_odeiv_step_name (arg1 : access constant gsl_odeiv_step) return Interfaces.C.Strings.chars_ptr  -- /usr/include/gsl/gsl_odeiv.h:132
    with Import => True, 
@@ -153,6 +216,16 @@ package GSL.Low_Level.gsl_gsl_odeiv_h is
    with Import => True, 
         Convention => C, 
         External_Name => "gsl_odeiv_step_apply";
+
+  -- General step size control object.
+  -- *
+  -- * The hadjust() method controls the adjustment of
+  -- * step size given the result of a step and the error.
+  -- * Valid hadjust() methods must return one of the codes below.
+  -- *
+  -- * The general data can be used by specializations
+  -- * to store state and control their heuristics.
+  --  
 
    type gsl_odeiv_control_type is record
       name : Interfaces.C.Strings.chars_ptr;  -- /usr/include/gsl/gsl_odeiv.h:149
@@ -180,6 +253,9 @@ package GSL.Low_Level.gsl_gsl_odeiv_h is
       state : System.Address;  -- /usr/include/gsl/gsl_odeiv.h:160
    end record
    with Convention => C_Pass_By_Copy;  -- /usr/include/gsl/gsl_odeiv.h:162
+
+  -- Possible return values for an hadjust() evolution method.
+  --  
 
    function gsl_odeiv_control_alloc (arg1 : access constant gsl_odeiv_control_type) return access gsl_odeiv_control  -- /usr/include/gsl/gsl_odeiv.h:170
    with Import => True, 
@@ -217,6 +293,25 @@ package GSL.Low_Level.gsl_gsl_odeiv_h is
         Convention => C, 
         External_Name => "gsl_odeiv_control_name";
 
+  -- Available control object constructors.
+  -- *
+  -- * The standard control object is a four parameter heuristic
+  -- * defined as follows:
+  -- *    D0 = eps_abs + eps_rel * (a_y |y| + a_dydt h |y'|)
+  -- *    D1 = |yerr|
+  -- *    q  = consistency order of method (q=4 for 4(5) embedded RK)
+  -- *    S  = safety factor (0.9 say)
+  -- *
+  -- *                      /  (D0/D1)^(1/(q+1))  D0 >= D1
+  -- *    h_NEW = S h_OLD * |
+  -- *                      \  (D0/D1)^(1/q)      D0 < D1
+  -- *
+  -- * This encompasses all the standard error scaling methods.
+  -- *
+  -- * The y method is the standard method with a_y=1, a_dydt=0.
+  -- * The yp method is the standard method with a_y=0, a_dydt=1.
+  --  
+
    function gsl_odeiv_control_standard_new
      (arg1 : double;
       arg2 : double;
@@ -236,6 +331,12 @@ package GSL.Low_Level.gsl_gsl_odeiv_h is
         Convention => C, 
         External_Name => "gsl_odeiv_control_yp_new";
 
+  -- This controller computes errors using different absolute errors for
+  -- * each component
+  -- *
+  -- *    D0 = eps_abs * scale_abs[i] + eps_rel * (a_y |y| + a_dydt h |y'|)
+  --  
+
    function gsl_odeiv_control_scaled_new
      (arg1 : double;
       arg2 : double;
@@ -246,6 +347,9 @@ package GSL.Low_Level.gsl_gsl_odeiv_h is
    with Import => True, 
         Convention => C, 
         External_Name => "gsl_odeiv_control_scaled_new";
+
+  -- General evolution object.
+  --  
 
    type gsl_odeiv_evolve is record
       dimension : aliased size_t;  -- /usr/include/gsl/gsl_odeiv.h:209
@@ -258,6 +362,9 @@ package GSL.Low_Level.gsl_gsl_odeiv_h is
       failed_steps : aliased unsigned_long;  -- /usr/include/gsl/gsl_odeiv.h:216
    end record
    with Convention => C_Pass_By_Copy;  -- /usr/include/gsl/gsl_odeiv.h:218
+
+  -- Evolution object methods.
+  --  
 
    function gsl_odeiv_evolve_alloc (arg1 : size_t) return access gsl_odeiv_evolve  -- /usr/include/gsl/gsl_odeiv.h:222
    with Import => True, 

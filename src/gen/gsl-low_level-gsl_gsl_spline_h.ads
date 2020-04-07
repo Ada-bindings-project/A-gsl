@@ -8,6 +8,26 @@ with Interfaces.C.Strings;
 
 package GSL.Low_Level.gsl_gsl_spline_h is
 
+  -- interpolation/gsl_spline.h
+  -- * 
+  -- * Copyright (C) 2001, 2007 Brian Gough
+  -- * 
+  -- * This program is free software; you can redistribute it and/or modify
+  -- * it under the terms of the GNU General Public License as published by
+  -- * the Free Software Foundation; either version 3 of the License, or (at
+  -- * your option) any later version.
+  -- * 
+  -- * This program is distributed in the hope that it will be useful, but
+  -- * WITHOUT ANY WARRANTY; without even the implied warranty of
+  -- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+  -- * General Public License for more details.
+  -- * 
+  -- * You should have received a copy of the GNU General Public License
+  -- * along with this program; if not, write to the Free Software
+  -- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
+  --  
+
+  -- general interpolation object  
    type gsl_spline is record
       interp : access GSL.Low_Level.gsl_gsl_interp_h.gsl_interp;  -- /usr/include/gsl/gsl_spline.h:40
       x : access double;  -- /usr/include/gsl/gsl_spline.h:41

@@ -9,6 +9,25 @@ limited with GSL.Low_Level.gsl_gsl_interp_h;
 
 package GSL.Low_Level.gsl_gsl_interp2d_h is
 
+  -- interpolation/gsl_interp2d.h
+  -- * 
+  -- * Copyright 2012 David Zaslavsky
+  -- * 
+  -- * This program is free software; you can redistribute it and/or modify
+  -- * it under the terms of the GNU General Public License as published by
+  -- * the Free Software Foundation; either version 3 of the License, or (at
+  -- * your option) any later version.
+  -- * 
+  -- * This program is distributed in the hope that it will be useful, but
+  -- * WITHOUT ANY WARRANTY; without even the implied warranty of
+  -- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+  -- * General Public License for more details.
+  -- * 
+  -- * You should have received a copy of the GNU General Public License
+  -- * along with this program; if not, write to the Free Software
+  -- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
+  --  
+
    type gsl_interp2d_type is record
       name : Interfaces.C.Strings.chars_ptr;  -- /usr/include/gsl/gsl_interp2d.h:38
       min_size : aliased unsigned;  -- /usr/include/gsl/gsl_interp2d.h:39
@@ -96,6 +115,14 @@ package GSL.Low_Level.gsl_gsl_interp2d_h is
    end record
    with Convention => C_Pass_By_Copy;  -- /usr/include/gsl/gsl_interp2d.h:49
 
+  -- interpolation type  
+  -- minimum value of x for which data have been provided  
+  -- maximum value of x for which data have been provided  
+  -- minimum value of y for which data have been provided  
+  -- maximum value of y for which data have been provided  
+  -- number of x values provided  
+  -- number of y values provided  
+  -- internal state object specific to the interpolation type  
    type gsl_interp2d is record
       c_type : access constant gsl_interp2d_type;  -- /usr/include/gsl/gsl_interp2d.h:52
       xmin : aliased double;  -- /usr/include/gsl/gsl_interp2d.h:53
@@ -108,6 +135,7 @@ package GSL.Low_Level.gsl_gsl_interp2d_h is
    end record
    with Convention => C_Pass_By_Copy;  -- /usr/include/gsl/gsl_interp2d.h:60
 
+  -- available types  
    gsl_interp2d_bilinear : access constant gsl_interp2d_type  -- /usr/include/gsl/gsl_interp2d.h:63
    with Import => True, 
         Convention => C, 

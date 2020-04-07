@@ -15,6 +15,33 @@ limited with GSL.Low_Level.gsl_gsl_matrix_complex_double_h;
 
 package GSL.Low_Level.gsl_gsl_blas_h is
 
+  -- blas/gsl_blas.h
+  -- * 
+  -- * Copyright (C) 1996, 1997, 1998, 1999, 2000 Gerard Jungman
+  -- * 
+  -- * This program is free software; you can redistribute it and/or modify
+  -- * it under the terms of the GNU General Public License as published by
+  -- * the Free Software Foundation; either version 3 of the License, or (at
+  -- * your option) any later version.
+  -- * 
+  -- * This program is distributed in the hope that it will be useful, but
+  -- * WITHOUT ANY WARRANTY; without even the implied warranty of
+  -- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+  -- * General Public License for more details.
+  -- * 
+  -- * You should have received a copy of the GNU General Public License
+  -- * along with this program; if not, write to the Free Software
+  -- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
+  --  
+
+  -- * Author:  G. Jungman
+  --  
+
+  -- ========================================================================
+  -- * Level 1
+  -- * ========================================================================
+  --  
+
    function gsl_blas_sdsdot
      (alpha : float;
       X : access constant GSL.Low_Level.gsl_gsl_vector_float_h.gsl_vector_float;
@@ -314,6 +341,14 @@ package GSL.Low_Level.gsl_gsl_blas_h is
         Convention => C, 
         External_Name => "gsl_blas_zdscal";
 
+  -- ===========================================================================
+  -- * Level 2
+  -- * ===========================================================================
+  --  
+
+  -- * Routines with standard 4 prefixes (S, D, C, Z)
+  --  
+
    function gsl_blas_sgemv
      (TransA : GSL.Low_Level.gsl_gsl_blas_types_h.CBLAS_TRANSPOSE_t;
       alpha : float;
@@ -438,6 +473,9 @@ package GSL.Low_Level.gsl_gsl_blas_h is
         Convention => C, 
         External_Name => "gsl_blas_ztrsv";
 
+  -- * Routines with S and D prefixes only
+  --  
+
    function gsl_blas_ssymv
      (Uplo : GSL.Low_Level.gsl_gsl_blas_types_h.CBLAS_UPLO_t;
       alpha : float;
@@ -515,6 +553,9 @@ package GSL.Low_Level.gsl_gsl_blas_h is
    with Import => True, 
         Convention => C, 
         External_Name => "gsl_blas_dsyr2";
+
+  -- * Routines with C and Z prefixes only
+  --  
 
    function gsl_blas_chemv
      (Uplo : GSL.Low_Level.gsl_gsl_blas_types_h.CBLAS_UPLO_t;
@@ -611,6 +652,14 @@ package GSL.Low_Level.gsl_gsl_blas_h is
    with Import => True, 
         Convention => C, 
         External_Name => "gsl_blas_zher2";
+
+  -- * ===========================================================================
+  -- * Prototypes for level 3 BLAS
+  -- * ===========================================================================
+  --  
+
+  -- * Routines with standard 4 prefixes (S, D, C, Z)
+  --  
 
    function gsl_blas_sgemm
      (TransA : GSL.Low_Level.gsl_gsl_blas_types_h.CBLAS_TRANSPOSE_t;
@@ -895,6 +944,9 @@ package GSL.Low_Level.gsl_gsl_blas_h is
    with Import => True, 
         Convention => C, 
         External_Name => "gsl_blas_ztrsm";
+
+  -- * Routines with prefixes C and Z only
+  --  
 
    function gsl_blas_chemm
      (Side : GSL.Low_Level.gsl_gsl_blas_types_h.CBLAS_SIDE_t;

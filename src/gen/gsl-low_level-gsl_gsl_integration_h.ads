@@ -7,6 +7,26 @@ with GSL.Low_Level.gsl_gsl_math_h;
 
 package GSL.Low_Level.gsl_gsl_integration_h is
 
+  -- integration/gsl_integration.h
+  -- * 
+  -- * Copyright (C) 1996, 1997, 1998, 1999, 2000, 2007 Brian Gough
+  -- * 
+  -- * This program is free software; you can redistribute it and/or modify
+  -- * it under the terms of the GNU General Public License as published by
+  -- * the Free Software Foundation; either version 3 of the License, or (at
+  -- * your option) any later version.
+  -- * 
+  -- * This program is distributed in the hope that it will be useful, but
+  -- * WITHOUT ANY WARRANTY; without even the implied warranty of
+  -- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+  -- * General Public License for more details.
+  -- * 
+  -- * You should have received a copy of the GNU General Public License
+  -- * along with this program; if not, write to the Free Software
+  -- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
+  --  
+
+  -- Workspace for adaptive integrators  
    type gsl_integration_workspace is record
       limit : aliased size_t;  -- /usr/include/gsl/gsl_integration.h:41
       size : aliased size_t;  -- /usr/include/gsl/gsl_integration.h:42
@@ -32,6 +52,7 @@ package GSL.Low_Level.gsl_gsl_integration_h is
         Convention => C, 
         External_Name => "gsl_integration_workspace_free";
 
+  -- Workspace for QAWS integrator  
    type gsl_integration_qaws_table_array6804 is array (0 .. 24) of aliased double;
    type gsl_integration_qaws_table is record
       alpha : aliased double;  -- /usr/include/gsl/gsl_integration.h:66
@@ -69,6 +90,7 @@ package GSL.Low_Level.gsl_gsl_integration_h is
         Convention => C, 
         External_Name => "gsl_integration_qaws_table_free";
 
+  -- Workspace for QAWO integrator  
    type gsl_integration_qawo_enum is 
      (GSL_INTEG_COSINE,
       GSL_INTEG_SINE)
@@ -112,6 +134,7 @@ package GSL.Low_Level.gsl_gsl_integration_h is
         Convention => C, 
         External_Name => "gsl_integration_qawo_table_free";
 
+  -- Definition of an integration rule  
    --  skipped function type gsl_integration_rule
 
    procedure gsl_integration_qk15
@@ -196,6 +219,15 @@ package GSL.Low_Level.gsl_gsl_integration_h is
         Convention => C, 
         External_Name => "gsl_integration_qcheb";
 
+  -- The low-level integration rules in QUADPACK are identified by small
+  --   integers (1-6). We'll use symbolic constants to refer to them.   
+
+  -- 15 point Gauss-Kronrod rule  
+  -- 21 point Gauss-Kronrod rule  
+  -- 31 point Gauss-Kronrod rule  
+  -- 41 point Gauss-Kronrod rule  
+  -- 51 point Gauss-Kronrod rule  
+  -- 61 point Gauss-Kronrod rule  
    procedure gsl_integration_qk
      (n : int;
       xgk : access double;
@@ -366,6 +398,11 @@ package GSL.Low_Level.gsl_gsl_integration_h is
         Convention => C, 
         External_Name => "gsl_integration_qawf";
 
+  -- Workspace for fixed-order Gauss-Legendre integration  
+  -- number of points  
+  -- Gauss abscissae/points  
+  -- Gauss weights for each abscissae  
+  -- high precision abscissae/weights precomputed?  
    type gsl_integration_glfixed_table is record
       n : aliased size_t;  -- /usr/include/gsl/gsl_integration.h:254
       x : access double;  -- /usr/include/gsl/gsl_integration.h:255
@@ -384,6 +421,7 @@ package GSL.Low_Level.gsl_gsl_integration_h is
         Convention => C, 
         External_Name => "gsl_integration_glfixed_table_free";
 
+  -- Routine for fixed-order Gauss-Legendre integration  
    function gsl_integration_glfixed
      (f : access constant GSL.Low_Level.gsl_gsl_math_h.gsl_function;
       a : double;
@@ -393,6 +431,7 @@ package GSL.Low_Level.gsl_gsl_integration_h is
         Convention => C, 
         External_Name => "gsl_integration_glfixed";
 
+  -- Routine to retrieve the i-th Gauss-Legendre point and weight from t  
    function gsl_integration_glfixed_point
      (a : double;
       b : double;
@@ -404,6 +443,8 @@ package GSL.Low_Level.gsl_gsl_integration_h is
         Convention => C, 
         External_Name => "gsl_integration_glfixed_point";
 
+  -- Cquad integration - Pedro Gonnet  
+  -- Data of a single interval  
    type gsl_integration_cquad_ival_array6872 is array (0 .. 63) of aliased double;
    type gsl_integration_cquad_ival_array6874 is array (0 .. 32) of aliased double;
    type gsl_integration_cquad_ival is record
@@ -419,6 +460,7 @@ package GSL.Low_Level.gsl_gsl_integration_h is
    end record
    with Convention => C_Pass_By_Copy;  -- /usr/include/gsl/gsl_integration.h:293
 
+  -- The workspace is just a collection of intervals  
    type gsl_integration_cquad_workspace is record
       size : aliased size_t;  -- /usr/include/gsl/gsl_integration.h:299
       ivals : access gsl_integration_cquad_ival;  -- /usr/include/gsl/gsl_integration.h:300
@@ -450,6 +492,10 @@ package GSL.Low_Level.gsl_gsl_integration_h is
         Convention => C, 
         External_Name => "gsl_integration_cquad";
 
+  -- Romberg integration workspace and routines  
+  -- maximum number of steps  
+  -- workspace for a row of R matrix, size n  
+  -- workspace for a row of R matrix, size n  
    type gsl_integration_romberg_workspace is record
       n : aliased size_t;  -- /usr/include/gsl/gsl_integration.h:320
       work1 : access double;  -- /usr/include/gsl/gsl_integration.h:321
@@ -480,6 +526,7 @@ package GSL.Low_Level.gsl_gsl_integration_h is
         Convention => C, 
         External_Name => "gsl_integration_romberg";
 
+  -- IQPACK related structures and routines  
    type gsl_integration_fixed_params is record
       alpha : aliased double;  -- /usr/include/gsl/gsl_integration.h:335
       beta : aliased double;  -- /usr/include/gsl/gsl_integration.h:336
@@ -503,6 +550,11 @@ package GSL.Low_Level.gsl_gsl_integration_h is
    end record
    with Convention => C_Pass_By_Copy;  -- /usr/include/gsl/gsl_integration.h:350
 
+  -- number of nodes/weights  
+  -- quadrature weights  
+  -- quadrature nodes  
+  -- diagonal of Jacobi matrix  
+  -- subdiagonal of Jacobi matrix  
    type gsl_integration_fixed_workspace is record
       n : aliased size_t;  -- /usr/include/gsl/gsl_integration.h:354
       weights : access double;  -- /usr/include/gsl/gsl_integration.h:355
@@ -513,6 +565,7 @@ package GSL.Low_Level.gsl_gsl_integration_h is
    end record
    with Convention => C_Pass_By_Copy;  -- /usr/include/gsl/gsl_integration.h:360
 
+  -- IQPACK integral types  
    gsl_integration_fixed_legendre : access constant gsl_integration_fixed_type  -- /usr/include/gsl/gsl_integration.h:363
    with Import => True, 
         Convention => C, 

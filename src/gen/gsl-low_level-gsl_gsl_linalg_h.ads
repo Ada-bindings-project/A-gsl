@@ -15,11 +15,37 @@ with System;
 
 package GSL.Low_Level.gsl_gsl_linalg_h is
 
+  -- linalg/gsl_linalg.h
+  -- * 
+  -- * Copyright (C) 1996, 1997, 1998, 1999, 2000, 2006, 2007 Gerard Jungman, Brian Gough, Patrick Alken
+  -- * 
+  -- * This program is free software; you can redistribute it and/or modify
+  -- * it under the terms of the GNU General Public License as published by
+  -- * the Free Software Foundation; either version 3 of the License, or (at
+  -- * your option) any later version.
+  -- * 
+  -- * This program is distributed in the hope that it will be useful, but
+  -- * WITHOUT ANY WARRANTY; without even the implied warranty of
+  -- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+  -- * General Public License for more details.
+  -- * 
+  -- * You should have received a copy of the GNU General Public License
+  -- * along with this program; if not, write to the Free Software
+  -- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
+  --  
+
    type gsl_linalg_matrix_mod_t is 
      (GSL_LINALG_MOD_NONE,
       GSL_LINALG_MOD_TRANSPOSE,
       GSL_LINALG_MOD_CONJUGATE)
    with Convention => C;  -- /usr/include/gsl/gsl_linalg.h:50
+
+  -- Note: You can now use the gsl_blas_dgemm function instead of matmult  
+  -- Simple implementation of matrix multiply.
+  -- * Calculates C = A.B
+  -- *
+  -- * exceptions: GSL_EBADLEN
+  --  
 
    function gsl_linalg_matmult
      (A : access constant GSL.Low_Level.gsl_gsl_matrix_double_h.gsl_matrix;
@@ -28,6 +54,13 @@ package GSL.Low_Level.gsl_gsl_linalg_h is
    with Import => True, 
         Convention => C, 
         External_Name => "gsl_linalg_matmult";
+
+  -- Simple implementation of matrix multiply.
+  -- * Allows transposition of either matrix, so it
+  -- * can compute A.B or Trans(A).B or A.Trans(B) or Trans(A).Trans(B)
+  -- *
+  -- * exceptions: GSL_EBADLEN
+  --  
 
    function gsl_linalg_matmult_mod
      (A : access constant GSL.Low_Level.gsl_gsl_matrix_double_h.gsl_matrix;
@@ -39,6 +72,15 @@ package GSL.Low_Level.gsl_gsl_linalg_h is
         Convention => C, 
         External_Name => "gsl_linalg_matmult_mod";
 
+  -- Calculate the matrix exponential by the scaling and
+  -- * squaring method described in Moler + Van Loan,
+  -- * SIAM Rev 20, 801 (1978). The mode argument allows
+  -- * choosing an optimal strategy, from the table
+  -- * given in the paper, for a given precision.
+  -- *
+  -- * exceptions: GSL_ENOTSQR, GSL_EBADLEN
+  --  
+
    function gsl_linalg_exponential_ss
      (A : access constant GSL.Low_Level.gsl_gsl_matrix_double_h.gsl_matrix;
       eA : access GSL.Low_Level.gsl_gsl_matrix_double_h.gsl_matrix;
@@ -47,6 +89,7 @@ package GSL.Low_Level.gsl_gsl_linalg_h is
         Convention => C, 
         External_Name => "gsl_linalg_exponential_ss";
 
+  -- Householder Transformations  
    function gsl_linalg_householder_transform (v : access GSL.Low_Level.gsl_gsl_vector_double_h.gsl_vector) return double  -- /usr/include/gsl/gsl_linalg.h:94
    with Import => True, 
         Convention => C, 
@@ -110,6 +153,7 @@ package GSL.Low_Level.gsl_gsl_linalg_h is
         Convention => C, 
         External_Name => "gsl_linalg_complex_householder_hv";
 
+  -- Hessenberg reduction  
    function gsl_linalg_hessenberg_decomp (A : access GSL.Low_Level.gsl_gsl_matrix_double_h.gsl_matrix; tau : access GSL.Low_Level.gsl_gsl_vector_double_h.gsl_vector) return int  -- /usr/include/gsl/gsl_linalg.h:126
    with Import => True, 
         Convention => C, 
@@ -145,6 +189,7 @@ package GSL.Low_Level.gsl_gsl_linalg_h is
         Convention => C, 
         External_Name => "gsl_linalg_hessenberg_submatrix";
 
+  -- Hessenberg-Triangular reduction  
    function gsl_linalg_hesstri_decomp
      (A : access GSL.Low_Level.gsl_gsl_matrix_double_h.gsl_matrix;
       B : access GSL.Low_Level.gsl_gsl_matrix_double_h.gsl_matrix;
@@ -154,6 +199,10 @@ package GSL.Low_Level.gsl_gsl_linalg_h is
    with Import => True, 
         Convention => C, 
         External_Name => "gsl_linalg_hesstri_decomp";
+
+  -- Singular Value Decomposition
+  -- * exceptions: 
+  --  
 
    function gsl_linalg_SV_decomp
      (A : access GSL.Low_Level.gsl_gsl_matrix_double_h.gsl_matrix;
@@ -196,6 +245,9 @@ package GSL.Low_Level.gsl_gsl_linalg_h is
    with Import => True, 
         Convention => C, 
         External_Name => "gsl_linalg_SV_leverage";
+
+  -- LU Decomposition, Gaussian elimination with partial pivoting
+  --  
 
    function gsl_linalg_LU_decomp
      (A : access GSL.Low_Level.gsl_gsl_matrix_double_h.gsl_matrix;
@@ -256,6 +308,7 @@ package GSL.Low_Level.gsl_gsl_linalg_h is
         Convention => C, 
         External_Name => "gsl_linalg_LU_sgndet";
 
+  -- Complex LU Decomposition  
    function gsl_linalg_complex_LU_decomp
      (A : access GSL.Low_Level.gsl_gsl_matrix_complex_double_h.gsl_matrix_complex;
       p : access GSL.Low_Level.gsl_gsl_permutation_h.gsl_permutation;
@@ -315,6 +368,7 @@ package GSL.Low_Level.gsl_gsl_linalg_h is
         Convention => C, 
         External_Name => "gsl_linalg_complex_LU_sgndet";
 
+  -- QR decomposition  
    function gsl_linalg_QR_decomp (A : access GSL.Low_Level.gsl_gsl_matrix_double_h.gsl_matrix; tau : access GSL.Low_Level.gsl_gsl_vector_double_h.gsl_vector) return int  -- /usr/include/gsl/gsl_linalg.h:238
    with Import => True, 
         Convention => C, 
@@ -432,6 +486,7 @@ package GSL.Low_Level.gsl_gsl_linalg_h is
         Convention => C, 
         External_Name => "gsl_linalg_R_svx";
 
+  -- Q R P^T decomposition  
    function gsl_linalg_QRPT_decomp
      (A : access GSL.Low_Level.gsl_gsl_matrix_double_h.gsl_matrix;
       tau : access GSL.Low_Level.gsl_gsl_vector_double_h.gsl_vector;
@@ -546,6 +601,7 @@ package GSL.Low_Level.gsl_gsl_linalg_h is
         Convention => C, 
         External_Name => "gsl_linalg_QRPT_rcond";
 
+  -- COD decomposition  
    function gsl_linalg_COD_decomp
      (A : access GSL.Low_Level.gsl_gsl_matrix_double_h.gsl_matrix;
       tau_Q : access GSL.Low_Level.gsl_gsl_vector_double_h.gsl_vector;
@@ -620,6 +676,7 @@ package GSL.Low_Level.gsl_gsl_linalg_h is
         Convention => C, 
         External_Name => "gsl_linalg_COD_matZ";
 
+  -- LQ decomposition  
    function gsl_linalg_LQ_decomp (A : access GSL.Low_Level.gsl_gsl_matrix_double_h.gsl_matrix; tau : access GSL.Low_Level.gsl_gsl_vector_double_h.gsl_vector) return int  -- /usr/include/gsl/gsl_linalg.h:395
    with Import => True, 
         Convention => C, 
@@ -716,6 +773,7 @@ package GSL.Low_Level.gsl_gsl_linalg_h is
         Convention => C, 
         External_Name => "gsl_linalg_LQ_LQsolve";
 
+  -- P^T L Q decomposition  
    function gsl_linalg_PTLQ_decomp
      (A : access GSL.Low_Level.gsl_gsl_matrix_double_h.gsl_matrix;
       tau : access GSL.Low_Level.gsl_gsl_vector_double_h.gsl_vector;
@@ -794,6 +852,7 @@ package GSL.Low_Level.gsl_gsl_linalg_h is
         Convention => C, 
         External_Name => "gsl_linalg_PTLQ_update";
 
+  -- Cholesky Decomposition  
    function gsl_linalg_cholesky_decomp (A : access GSL.Low_Level.gsl_gsl_matrix_double_h.gsl_matrix) return int  -- /usr/include/gsl/gsl_linalg.h:471
    with Import => True, 
         Convention => C, 
@@ -834,6 +893,13 @@ package GSL.Low_Level.gsl_gsl_linalg_h is
    with Import => True, 
         Convention => C, 
         External_Name => "gsl_linalg_cholesky_invert";
+
+  -- Cholesky decomposition with unit-diagonal triangular parts.
+  -- *   A = L D L^T, where diag(L) = (1,1,...,1).
+  -- *   Upon exit, A contains L and L^T as for Cholesky, and
+  -- *   the diagonal of A is (1,1,...,1). The vector Dis set
+  -- *   to the diagonal elements of the diagonal matrix D.
+  --  
 
    function gsl_linalg_cholesky_decomp_unit (A : access GSL.Low_Level.gsl_gsl_matrix_double_h.gsl_matrix; D : access GSL.Low_Level.gsl_gsl_vector_double_h.gsl_vector) return int  -- /usr/include/gsl/gsl_linalg.h:494
    with Import => True, 
@@ -880,6 +946,7 @@ package GSL.Low_Level.gsl_gsl_linalg_h is
         Convention => C, 
         External_Name => "gsl_linalg_cholesky_rcond";
 
+  -- Complex Cholesky Decomposition  
    function gsl_linalg_complex_cholesky_decomp (A : access GSL.Low_Level.gsl_gsl_matrix_complex_double_h.gsl_matrix_complex) return int  -- /usr/include/gsl/gsl_linalg.h:516
    with Import => True, 
         Convention => C, 
@@ -903,6 +970,7 @@ package GSL.Low_Level.gsl_gsl_linalg_h is
         Convention => C, 
         External_Name => "gsl_linalg_complex_cholesky_invert";
 
+  -- Pivoted Cholesky LDLT decomposition  
    function gsl_linalg_pcholesky_decomp (A : access GSL.Low_Level.gsl_gsl_matrix_double_h.gsl_matrix; p : access GSL.Low_Level.gsl_gsl_permutation_h.gsl_permutation) return int  -- /usr/include/gsl/gsl_linalg.h:529
    with Import => True, 
         Convention => C, 
@@ -969,6 +1037,7 @@ package GSL.Low_Level.gsl_gsl_linalg_h is
         Convention => C, 
         External_Name => "gsl_linalg_pcholesky_rcond";
 
+  -- Modified Cholesky decomposition  
    function gsl_linalg_mcholesky_decomp
      (A : access GSL.Low_Level.gsl_gsl_matrix_double_h.gsl_matrix;
       p : access GSL.Low_Level.gsl_gsl_permutation_h.gsl_permutation;
@@ -1011,6 +1080,7 @@ package GSL.Low_Level.gsl_gsl_linalg_h is
         Convention => C, 
         External_Name => "gsl_linalg_mcholesky_invert";
 
+  -- Symmetric to symmetric tridiagonal decomposition  
    function gsl_linalg_symmtd_decomp (A : access GSL.Low_Level.gsl_gsl_matrix_double_h.gsl_matrix; tau : access GSL.Low_Level.gsl_gsl_vector_double_h.gsl_vector) return int  -- /usr/include/gsl/gsl_linalg.h:582
    with Import => True, 
         Convention => C, 
@@ -1034,6 +1104,7 @@ package GSL.Low_Level.gsl_gsl_linalg_h is
         Convention => C, 
         External_Name => "gsl_linalg_symmtd_unpack_T";
 
+  -- Hermitian to symmetric tridiagonal decomposition  
    function gsl_linalg_hermtd_decomp (A : access GSL.Low_Level.gsl_gsl_matrix_complex_double_h.gsl_matrix_complex; tau : access GSL.Low_Level.gsl_gsl_vector_complex_double_h.gsl_vector_complex) return int  -- /usr/include/gsl/gsl_linalg.h:597
    with Import => True, 
         Convention => C, 
@@ -1057,6 +1128,10 @@ package GSL.Low_Level.gsl_gsl_linalg_h is
         Convention => C, 
         External_Name => "gsl_linalg_hermtd_unpack_T";
 
+  -- Linear Solve Using Householder Transformations
+  -- * exceptions: 
+  --  
+
    function gsl_linalg_HH_solve
      (A : access GSL.Low_Level.gsl_gsl_matrix_double_h.gsl_matrix;
       b : access constant GSL.Low_Level.gsl_gsl_vector_double_h.gsl_vector;
@@ -1070,6 +1145,16 @@ package GSL.Low_Level.gsl_gsl_linalg_h is
         Convention => C, 
         External_Name => "gsl_linalg_HH_svx";
 
+  -- Linear solve for a symmetric tridiagonal system.
+  -- * The input vectors represent the NxN matrix as follows:
+  -- *
+  -- *     diag[0]  offdiag[0]             0    ...
+  -- *  offdiag[0]     diag[1]    offdiag[1]    ...
+  -- *           0  offdiag[1]       diag[2]    ...
+  -- *           0           0    offdiag[2]    ...
+  -- *         ...         ...           ...    ...
+  --  
+
    function gsl_linalg_solve_symm_tridiag
      (diag : access constant GSL.Low_Level.gsl_gsl_vector_double_h.gsl_vector;
       offdiag : access constant GSL.Low_Level.gsl_gsl_vector_double_h.gsl_vector;
@@ -1078,6 +1163,16 @@ package GSL.Low_Level.gsl_gsl_linalg_h is
    with Import => True, 
         Convention => C, 
         External_Name => "gsl_linalg_solve_symm_tridiag";
+
+  -- Linear solve for a nonsymmetric tridiagonal system.
+  -- * The input vectors represent the NxN matrix as follows:
+  -- *
+  -- *       diag[0]  abovediag[0]              0    ...
+  -- *  belowdiag[0]       diag[1]   abovediag[1]    ...
+  -- *             0  belowdiag[1]        diag[2]    ...
+  -- *             0             0   belowdiag[2]    ...
+  -- *           ...           ...            ...    ...
+  --  
 
    function gsl_linalg_solve_tridiag
      (diag : access constant GSL.Low_Level.gsl_gsl_vector_double_h.gsl_vector;
@@ -1089,6 +1184,17 @@ package GSL.Low_Level.gsl_gsl_linalg_h is
         Convention => C, 
         External_Name => "gsl_linalg_solve_tridiag";
 
+  -- Linear solve for a symmetric cyclic tridiagonal system.
+  -- * The input vectors represent the NxN matrix as follows:
+  -- *
+  -- *      diag[0]  offdiag[0]             0   .....  offdiag[N-1]
+  -- *   offdiag[0]     diag[1]    offdiag[1]   .....
+  -- *            0  offdiag[1]       diag[2]   .....
+  -- *            0           0    offdiag[2]   .....
+  -- *          ...         ...
+  -- * offdiag[N-1]         ...
+  --  
+
    function gsl_linalg_solve_symm_cyc_tridiag
      (diag : access constant GSL.Low_Level.gsl_gsl_vector_double_h.gsl_vector;
       offdiag : access constant GSL.Low_Level.gsl_gsl_vector_double_h.gsl_vector;
@@ -1097,6 +1203,17 @@ package GSL.Low_Level.gsl_gsl_linalg_h is
    with Import => True, 
         Convention => C, 
         External_Name => "gsl_linalg_solve_symm_cyc_tridiag";
+
+  -- Linear solve for a nonsymmetric cyclic tridiagonal system.
+  -- * The input vectors represent the NxN matrix as follows:
+  -- *
+  -- *        diag[0]  abovediag[0]             0   .....  belowdiag[N-1]
+  -- *   belowdiag[0]       diag[1]  abovediag[1]   .....
+  -- *              0  belowdiag[1]       diag[2]
+  -- *              0             0  belowdiag[2]   .....
+  -- *            ...           ...
+  -- * abovediag[N-1]           ...
+  --  
 
    function gsl_linalg_solve_cyc_tridiag
      (diag : access constant GSL.Low_Level.gsl_gsl_vector_double_h.gsl_vector;
@@ -1108,6 +1225,7 @@ package GSL.Low_Level.gsl_gsl_linalg_h is
         Convention => C, 
         External_Name => "gsl_linalg_solve_cyc_tridiag";
 
+  -- Bidiagonal decomposition  
    function gsl_linalg_bidiag_decomp
      (A : access GSL.Low_Level.gsl_gsl_matrix_double_h.gsl_matrix;
       tau_U : access GSL.Low_Level.gsl_gsl_vector_double_h.gsl_vector;
@@ -1145,6 +1263,7 @@ package GSL.Low_Level.gsl_gsl_linalg_h is
         Convention => C, 
         External_Name => "gsl_linalg_bidiag_unpack_B";
 
+  -- Balancing  
    function gsl_linalg_balance_matrix (A : access GSL.Low_Level.gsl_gsl_matrix_double_h.gsl_matrix; D : access GSL.Low_Level.gsl_gsl_vector_double_h.gsl_vector) return int  -- /usr/include/gsl/gsl_linalg.h:709
    with Import => True, 
         Convention => C, 
@@ -1160,6 +1279,7 @@ package GSL.Low_Level.gsl_gsl_linalg_h is
         Convention => C, 
         External_Name => "gsl_linalg_balance_columns";
 
+  -- condition estimation  
    function gsl_linalg_tri_upper_rcond
      (A : access constant GSL.Low_Level.gsl_gsl_matrix_double_h.gsl_matrix;
       rcond : access double;
@@ -1189,6 +1309,7 @@ package GSL.Low_Level.gsl_gsl_linalg_h is
         Convention => C, 
         External_Name => "gsl_linalg_invnorm1";
 
+  -- triangular matrices  
    function gsl_linalg_tri_upper_invert (T : access GSL.Low_Level.gsl_gsl_matrix_double_h.gsl_matrix) return int  -- /usr/include/gsl/gsl_linalg.h:723
    with Import => True, 
         Convention => C, 
@@ -1228,4 +1349,9 @@ package GSL.Low_Level.gsl_gsl_linalg_h is
         Convention => C, 
         External_Name => "gsl_linalg_givens_gv";
 
+  -- Generate a Givens rotation (cos,sin) which takes v=(x,y) to (|v|,0) 
+  --   From Golub and Van Loan, "Matrix Computations", Section 5.1.8  
+
+  -- gsl_linalg_givens()  
+  -- Apply rotation to vector v' = G^T v  
 end GSL.Low_Level.gsl_gsl_linalg_h;

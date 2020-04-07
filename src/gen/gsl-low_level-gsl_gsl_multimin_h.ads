@@ -17,6 +17,30 @@ package GSL.Low_Level.gsl_gsl_multimin_h is
    --    return *((F).df))(x,(F).params,(g);
    --  arg-macro: function GSL_MULTIMIN_FN_EVAL_F_DF (F, x, y, g)
    --    return *((F).fdf))(x,(F).params,(y),(g);
+  -- multimin/gsl_multimin.h
+  -- * 
+  -- * Copyright (C) 1996, 1997, 1998, 1999, 2000 Fabrice Rossi
+  -- * 
+  -- * This program is free software; you can redistribute it and/or modify
+  -- * it under the terms of the GNU General Public License as published by
+  -- * the Free Software Foundation; either version 3 of the License, or (at
+  -- * your option) any later version.
+  -- * 
+  -- * This program is distributed in the hope that it will be useful, but
+  -- * WITHOUT ANY WARRANTY; without even the implied warranty of
+  -- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+  -- * General Public License for more details.
+  -- * 
+  -- * You should have received a copy of the GNU General Public License
+  -- * along with this program; if not, write to the Free Software
+  -- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
+  --  
+
+  -- Modified by Tuomo Keskitalo to include fminimizer and 
+  --   Nelder Mead related lines  
+
+  -- Definition of an arbitrary real-valued function with gsl_vector input and  
+  -- parameters  
    type gsl_multimin_function_struct is record
       f : access function (arg1 : access constant GSL.Low_Level.gsl_gsl_vector_double_h.gsl_vector; arg2 : System.Address) return double;  -- /usr/include/gsl/gsl_multimin.h:49
       n : aliased size_t;  -- /usr/include/gsl/gsl_multimin.h:50
@@ -26,6 +50,8 @@ package GSL.Low_Level.gsl_gsl_multimin_h is
 
    subtype gsl_multimin_function is gsl_multimin_function_struct;  -- /usr/include/gsl/gsl_multimin.h:54
 
+  -- Definition of an arbitrary differentiable real-valued function  
+  -- with gsl_vector input and parameters  
    type gsl_multimin_function_fdf_struct is record
       f : access function (arg1 : access constant GSL.Low_Level.gsl_gsl_vector_double_h.gsl_vector; arg2 : System.Address) return double;  -- /usr/include/gsl/gsl_multimin.h:62
       df : access procedure
@@ -52,6 +78,7 @@ package GSL.Low_Level.gsl_gsl_multimin_h is
         Convention => C, 
         External_Name => "gsl_multimin_diff";
 
+  -- minimization of non-differentiable functions  
    type gsl_multimin_fminimizer_type is record
       name : Interfaces.C.Strings.chars_ptr;  -- /usr/include/gsl/gsl_multimin.h:82
       size : aliased size_t;  -- /usr/include/gsl/gsl_multimin.h:83
@@ -72,6 +99,7 @@ package GSL.Low_Level.gsl_gsl_multimin_h is
    end record
    with Convention => C_Pass_By_Copy;  -- /usr/include/gsl/gsl_multimin.h:95
 
+  -- multi dimensional part  
    type gsl_multimin_fminimizer is record
       c_type : access constant gsl_multimin_fminimizer_type;  -- /usr/include/gsl/gsl_multimin.h:100
       f : access gsl_multimin_function;  -- /usr/include/gsl/gsl_multimin.h:101
@@ -126,6 +154,7 @@ package GSL.Low_Level.gsl_gsl_multimin_h is
         Convention => C, 
         External_Name => "gsl_multimin_fminimizer_size";
 
+  -- Convergence test functions  
    function gsl_multimin_test_gradient (g : access constant GSL.Low_Level.gsl_gsl_vector_double_h.gsl_vector; epsabs : double) return int  -- /usr/include/gsl/gsl_multimin.h:143
    with Import => True, 
         Convention => C, 
@@ -136,6 +165,7 @@ package GSL.Low_Level.gsl_gsl_multimin_h is
         Convention => C, 
         External_Name => "gsl_multimin_test_size";
 
+  -- minimisation of differentiable functions  
    type gsl_multimin_fdfminimizer_type is record
       name : Interfaces.C.Strings.chars_ptr;  -- /usr/include/gsl/gsl_multimin.h:152
       size : aliased size_t;  -- /usr/include/gsl/gsl_multimin.h:153
@@ -160,6 +190,7 @@ package GSL.Low_Level.gsl_gsl_multimin_h is
    end record
    with Convention => C_Pass_By_Copy;  -- /usr/include/gsl/gsl_multimin.h:164
 
+  -- multi dimensional part  
    type gsl_multimin_fdfminimizer is record
       c_type : access constant gsl_multimin_fdfminimizer_type;  -- /usr/include/gsl/gsl_multimin.h:169
       fdf : access gsl_multimin_function_fdf;  -- /usr/include/gsl/gsl_multimin.h:170

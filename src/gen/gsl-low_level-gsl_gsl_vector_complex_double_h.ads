@@ -11,6 +11,25 @@ with Interfaces.C.Strings;
 
 package GSL.Low_Level.gsl_gsl_vector_complex_double_h is
 
+  -- vector/gsl_vector_complex_double.h
+  -- * 
+  -- * Copyright (C) 1996, 1997, 1998, 1999, 2000, 2007 Gerard Jungman, Brian Gough
+  -- * 
+  -- * This program is free software; you can redistribute it and/or modify
+  -- * it under the terms of the GNU General Public License as published by
+  -- * the Free Software Foundation; either version 3 of the License, or (at
+  -- * your option) any later version.
+  -- * 
+  -- * This program is distributed in the hope that it will be useful, but
+  -- * WITHOUT ANY WARRANTY; without even the implied warranty of
+  -- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+  -- * General Public License for more details.
+  -- * 
+  -- * You should have received a copy of the GNU General Public License
+  -- * along with this program; if not, write to the Free Software
+  -- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
+  --  
+
    type gsl_vector_complex is record
       size : aliased size_t;  -- /usr/include/gsl/gsl_vector_complex_double.h:46
       stride : aliased size_t;  -- /usr/include/gsl/gsl_vector_complex_double.h:47
@@ -34,6 +53,7 @@ package GSL.Low_Level.gsl_gsl_vector_complex_double_h is
 
    subtype gsl_vector_complex_const_view is u_gsl_vector_complex_const_view;  -- /usr/include/gsl/gsl_vector_complex_double.h:65
 
+  -- Allocation  
    function gsl_vector_complex_alloc (arg1 : size_t) return access gsl_vector_complex  -- /usr/include/gsl/gsl_vector_complex_double.h:69
    with Import => True, 
         Convention => C, 
@@ -67,6 +87,7 @@ package GSL.Low_Level.gsl_gsl_vector_complex_double_h is
         Convention => C, 
         External_Name => "gsl_vector_complex_free";
 
+  -- Views  
    function gsl_vector_complex_view_array (base : access double; n : size_t) return u_gsl_vector_complex_view  -- /usr/include/gsl/gsl_vector_complex_double.h:89
    with Import => True, 
         Convention => C, 
@@ -147,6 +168,7 @@ package GSL.Low_Level.gsl_gsl_vector_complex_double_h is
         Convention => C, 
         External_Name => "gsl_vector_complex_const_imag";
 
+  -- Operations  
    procedure gsl_vector_complex_set_zero (v : access gsl_vector_complex)  -- /usr/include/gsl/gsl_vector_complex_double.h:145
    with Import => True, 
         Convention => C, 

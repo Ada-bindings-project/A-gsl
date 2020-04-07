@@ -13,6 +13,25 @@ package GSL.Low_Level.gsl_gsl_multifit_nlin_h is
 
    --  arg-macro: function GSL_MULTIFIT_FN_EVAL (F, x, y)
    --    return *((F).f))(x,(F).params,(y);
+  -- multifit_nlin/gsl_multifit_nlin.h
+  -- * 
+  -- * Copyright (C) 1996, 1997, 1998, 1999, 2000, 2007 Brian Gough
+  -- * 
+  -- * This program is free software; you can redistribute it and/or modify
+  -- * it under the terms of the GNU General Public License as published by
+  -- * the Free Software Foundation; either version 3 of the License, or (at
+  -- * your option) any later version.
+  -- * 
+  -- * This program is distributed in the hope that it will be useful, but
+  -- * WITHOUT ANY WARRANTY; without even the implied warranty of
+  -- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+  -- * General Public License for more details.
+  -- * 
+  -- * You should have received a copy of the GNU General Public License
+  -- * along with this program; if not, write to the Free Software
+  -- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
+  --  
+
    function gsl_multifit_gradient
      (J : access constant GSL.Low_Level.gsl_gsl_matrix_double_h.gsl_matrix;
       f : access constant GSL.Low_Level.gsl_gsl_vector_double_h.gsl_vector;
@@ -38,6 +57,7 @@ package GSL.Low_Level.gsl_gsl_multifit_nlin_h is
         Convention => C, 
         External_Name => "gsl_multifit_covar_QRPT";
 
+  -- Definition of vector-valued functions with parameters based on gsl_vector  
    type gsl_multifit_function_struct is record
       f : access function
            (arg1 : access constant GSL.Low_Level.gsl_gsl_vector_double_h.gsl_vector;
@@ -49,6 +69,8 @@ package GSL.Low_Level.gsl_gsl_multifit_nlin_h is
    end record
    with Convention => C_Pass_By_Copy;  -- /usr/include/gsl/gsl_multifit_nlin.h:52
 
+  -- number of functions  
+  -- number of independent variables  
    subtype gsl_multifit_function is gsl_multifit_function_struct;  -- /usr/include/gsl/gsl_multifit_nlin.h:60
 
    type gsl_multifit_fsolver_type is record
@@ -129,6 +151,9 @@ package GSL.Low_Level.gsl_gsl_multifit_nlin_h is
         Convention => C, 
         External_Name => "gsl_multifit_fsolver_position";
 
+  -- Definition of vector-valued functions and gradient with parameters
+  --   based on gsl_vector  
+
    type gsl_multifit_function_fdf_struct is record
       f : access function
            (arg1 : access constant GSL.Low_Level.gsl_gsl_vector_double_h.gsl_vector;
@@ -151,6 +176,11 @@ package GSL.Low_Level.gsl_gsl_multifit_nlin_h is
    end record
    with Convention => C_Pass_By_Copy;  -- /usr/include/gsl/gsl_multifit_nlin.h:108
 
+  -- number of functions  
+  -- number of independent variables  
+  -- user parameters  
+  -- number of function evaluations  
+  -- number of Jacobian evaluations  
    subtype gsl_multifit_function_fdf is gsl_multifit_function_fdf_struct;  -- /usr/include/gsl/gsl_multifit_nlin.h:120
 
    type gsl_multifit_fdfsolver_type is record
@@ -180,6 +210,12 @@ package GSL.Low_Level.gsl_gsl_multifit_nlin_h is
    end record
    with Convention => C_Pass_By_Copy;  -- /usr/include/gsl/gsl_multifit_nlin.h:137
 
+  -- parameter values x  
+  -- residual vector f(x)  
+  -- step dx  
+  -- gradient J^T f  
+  -- sqrt(wts)  
+  -- number of iterations performed  
    type gsl_multifit_fdfsolver is record
       c_type : access constant gsl_multifit_fdfsolver_type;  -- /usr/include/gsl/gsl_multifit_nlin.h:141
       fdf : access gsl_multifit_function_fdf;  -- /usr/include/gsl/gsl_multifit_nlin.h:142
@@ -325,6 +361,15 @@ package GSL.Low_Level.gsl_gsl_multifit_nlin_h is
         Convention => C, 
         External_Name => "gsl_multifit_fdfsolver_dif_fdf";
 
+  -- number of (original) residuals  
+  -- number of model parameters  
+  -- damping parameter  
+  -- diagonal damping matrix or NULL  
+  -- general damping matrix or NULL  
+  -- function values for finite diff J  
+  -- weight vector for augmented system  
+  -- user defined fdf  
+  -- Tikhonov modified fdf  
    type gsl_multifit_fdfridge is record
       n : aliased size_t;  -- /usr/include/gsl/gsl_multifit_nlin.h:212
       p : aliased size_t;  -- /usr/include/gsl/gsl_multifit_nlin.h:213
@@ -445,6 +490,7 @@ package GSL.Low_Level.gsl_gsl_multifit_nlin_h is
         Convention => C, 
         External_Name => "gsl_multifit_fdfridge_driver";
 
+  -- extern const gsl_multifit_fsolver_type * gsl_multifit_fsolver_gradient;  
    gsl_multifit_fdfsolver_lmsder : access constant gsl_multifit_fdfsolver_type  -- /usr/include/gsl/gsl_multifit_nlin.h:269
    with Import => True, 
         Convention => C, 

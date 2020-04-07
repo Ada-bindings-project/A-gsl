@@ -9,6 +9,25 @@ with Interfaces.C_Streams;
 
 package GSL.Low_Level.gsl_gsl_rng_h is
 
+  -- rng/gsl_rng.h
+  -- * 
+  -- * Copyright (C) 1996, 1997, 1998, 1999, 2000, 2004, 2007 James Theiler, Brian Gough
+  -- * 
+  -- * This program is free software; you can redistribute it and/or modify
+  -- * it under the terms of the GNU General Public License as published by
+  -- * the Free Software Foundation; either version 3 of the License, or (at
+  -- * your option) any later version.
+  -- * 
+  -- * This program is distributed in the hope that it will be useful, but
+  -- * WITHOUT ANY WARRANTY; without even the implied warranty of
+  -- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+  -- * General Public License for more details.
+  -- * 
+  -- * You should have received a copy of the GNU General Public License
+  -- * along with this program; if not, write to the Free Software
+  -- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
+  --  
+
    type gsl_rng_type is record
       name : Interfaces.C.Strings.chars_ptr;  -- /usr/include/gsl/gsl_rng.h:41
       max : aliased unsigned_long;  -- /usr/include/gsl/gsl_rng.h:42
@@ -25,6 +44,9 @@ package GSL.Low_Level.gsl_gsl_rng_h is
       state : System.Address;  -- /usr/include/gsl/gsl_rng.h:54
    end record
    with Convention => C_Pass_By_Copy;  -- /usr/include/gsl/gsl_rng.h:56
+
+  -- These structs also need to appear in default.c so you can select
+  --   them via the environment variable GSL_RNG_TYPE  
 
    gsl_rng_borosh13 : access constant gsl_rng_type  -- /usr/include/gsl/gsl_rng.h:62
    with Import => True, 
@@ -440,5 +462,11 @@ package GSL.Low_Level.gsl_gsl_rng_h is
    with Import => True, 
         Convention => C, 
         External_Name => "gsl_rng_uniform_int";
+
+  -- Note: to avoid integer overflow in (range+1) we work with scale =
+  --   range/n = (max-min)/n rather than scale=(max-min+1)/n, this reduces
+  --   efficiency slightly but avoids having to check for the out of range
+  --   value.  Note that range is typically O(2^32) so the addition of 1
+  --   is negligible in most usage.  
 
 end GSL.Low_Level.gsl_gsl_rng_h;

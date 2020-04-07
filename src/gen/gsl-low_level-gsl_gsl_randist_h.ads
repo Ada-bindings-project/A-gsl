@@ -10,6 +10,25 @@ with System;
 
 package GSL.Low_Level.gsl_gsl_randist_h is
 
+  -- randist/gsl_randist.h
+  -- * 
+  -- * Copyright (C) 1996, 1997, 1998, 1999, 2000, 2007 James Theiler, Brian Gough
+  -- * 
+  -- * This program is free software; you can redistribute it and/or modify
+  -- * it under the terms of the GNU General Public License as published by
+  -- * the Free Software Foundation; either version 3 of the License, or (at
+  -- * your option) any later version.
+  -- * 
+  -- * This program is distributed in the hope that it will be useful, but
+  -- * WITHOUT ANY WARRANTY; without even the implied warranty of
+  -- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+  -- * General Public License for more details.
+  -- * 
+  -- * You should have received a copy of the GNU General Public License
+  -- * along with this program; if not, write to the Free Software
+  -- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
+  --  
+
    function gsl_ran_bernoulli (r : access constant GSL.Low_Level.gsl_gsl_rng_h.gsl_rng; p : double) return unsigned  -- /usr/include/gsl/gsl_randist.h:38
    with Import => True, 
         Convention => C, 
@@ -719,6 +738,7 @@ package GSL.Low_Level.gsl_gsl_randist_h is
         Convention => C, 
         External_Name => "gsl_ran_sample";
 
+  -- struct for Walker algorithm  
    type gsl_ran_discrete_t is record
       K : aliased size_t;  -- /usr/include/gsl/gsl_randist.h:206
       A : access size_t;  -- /usr/include/gsl/gsl_randist.h:207

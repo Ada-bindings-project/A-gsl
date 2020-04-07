@@ -9,6 +9,25 @@ with GSL.Low_Level.gsl_gsl_math_h;
 
 package GSL.Low_Level.gsl_gsl_min_h is
 
+  -- min/gsl_min.h
+  -- * 
+  -- * Copyright (C) 1996, 1997, 1998, 1999, 2000, 2007, 2009 Brian Gough
+  -- * 
+  -- * This program is free software; you can redistribute it and/or modify
+  -- * it under the terms of the GNU General Public License as published by
+  -- * the Free Software Foundation; either version 3 of the License, or (at
+  -- * your option) any later version.
+  -- * 
+  -- * This program is distributed in the hope that it will be useful, but
+  -- * WITHOUT ANY WARRANTY; without even the implied warranty of
+  -- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+  -- * General Public License for more details.
+  -- * 
+  -- * You should have received a copy of the GNU General Public License
+  -- * along with this program; if not, write to the Free Software
+  -- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
+  --  
+
    type gsl_min_fminimizer_type is record
       name : Interfaces.C.Strings.chars_ptr;  -- /usr/include/gsl/gsl_min.h:41
       size : aliased size_t;  -- /usr/include/gsl/gsl_min.h:42
@@ -119,6 +138,7 @@ package GSL.Low_Level.gsl_gsl_min_h is
         Convention => C, 
         External_Name => "gsl_min_fminimizer_f_upper";
 
+  -- Deprecated, use x_minimum instead  
    function gsl_min_fminimizer_minimum (s : access constant gsl_min_fminimizer) return double  -- /usr/include/gsl/gsl_min.h:87
    with Import => True, 
         Convention => C, 

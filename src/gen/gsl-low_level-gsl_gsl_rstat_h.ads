@@ -6,6 +6,31 @@ with Interfaces.C; use Interfaces.C;
 
 package GSL.Low_Level.gsl_gsl_rstat_h is
 
+  -- rstat/gsl_rstat.h
+  -- * 
+  -- * Copyright (C) 2015 Patrick Alken
+  -- * 
+  -- * This program is free software; you can redistribute it and/or modify
+  -- * it under the terms of the GNU General Public License as published by
+  -- * the Free Software Foundation; either version 3 of the License, or (at
+  -- * your option) any later version.
+  -- * 
+  -- * This program is distributed in the hope that it will be useful, but
+  -- * WITHOUT ANY WARRANTY; without even the implied warranty of
+  -- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+  -- * General Public License for more details.
+  -- * 
+  -- * You should have received a copy of the GNU General Public License
+  -- * along with this program; if not, write to the Free Software
+  -- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
+  --  
+
+  -- p-quantile  
+  -- heights q_i  
+  -- positions n_i  
+  -- desired positions n_i'  
+  -- increments dn_i'  
+  -- number of data added  
    type gsl_rstat_quantile_workspace_array5447 is array (0 .. 4) of aliased double;
    type gsl_rstat_quantile_workspace_array5448 is array (0 .. 4) of aliased int;
    type gsl_rstat_quantile_workspace is record
@@ -43,6 +68,12 @@ package GSL.Low_Level.gsl_gsl_rstat_h is
         Convention => C, 
         External_Name => "gsl_rstat_quantile_get";
 
+  -- minimum value added  
+  -- maximum value added  
+  -- current mean  
+  -- M_k = sum_{i=1..n} [ x_i - mean_n ]^k  
+  -- number of data points added  
+  -- median workspace  
    type gsl_rstat_workspace is record
       min : aliased double;  -- /usr/include/gsl/gsl_rstat.h:53
       max : aliased double;  -- /usr/include/gsl/gsl_rstat.h:54

@@ -11,11 +11,40 @@ with Interfaces.C.Strings;
 
 package GSL.Low_Level.gsl_gsl_multilarge_nlinear_h is
 
+  -- multilarge_nlinear/gsl_multilarge_nlinear.h
+  -- * 
+  -- * Copyright (C) 2015, 2016 Patrick Alken
+  -- * 
+  -- * This program is free software; you can redistribute it and/or modify
+  -- * it under the terms of the GNU General Public License as published by
+  -- * the Free Software Foundation; either version 3 of the License, or (at
+  -- * your option) any later version.
+  -- * 
+  -- * This program is distributed in the hope that it will be useful, but
+  -- * WITHOUT ANY WARRANTY; without even the implied warranty of
+  -- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+  -- * General Public License for more details.
+  -- * 
+  -- * You should have received a copy of the GNU General Public License
+  -- * along with this program; if not, write to the Free Software
+  -- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
+  --  
+
    type gsl_multilarge_nlinear_fdtype is 
      (GSL_MULTILARGE_NLINEAR_FWDIFF,
       GSL_MULTILARGE_NLINEAR_CTRDIFF)
    with Convention => C;  -- /usr/include/gsl/gsl_multilarge_nlinear.h:47
 
+  -- Definition of vector-valued functions and gradient with parameters
+  --   based on gsl_vector  
+
+  -- number of functions  
+  -- number of independent variables  
+  -- user parameters  
+  -- number of function evaluations  
+  -- number of Jacobian matrix-vector evaluations  
+  -- number of Jacobian J^T J evaluations  
+  -- number of fvv evaluations  
    type gsl_multilarge_nlinear_fdf is record
       f : access function
            (arg1 : access constant GSL.Low_Level.gsl_gsl_vector_double_h.gsl_vector;
@@ -43,6 +72,7 @@ package GSL.Low_Level.gsl_gsl_multilarge_nlinear_h is
    end record
    with Convention => C_Pass_By_Copy;  -- /usr/include/gsl/gsl_multilarge_nlinear.h:67
 
+  -- trust region subproblem method  
    type gsl_multilarge_nlinear_trs is record
       name : Interfaces.C.Strings.chars_ptr;  -- /usr/include/gsl/gsl_multilarge_nlinear.h:72
       alloc : access function
@@ -65,12 +95,24 @@ package GSL.Low_Level.gsl_gsl_multilarge_nlinear_h is
    end record
    with Convention => C_Pass_By_Copy;  -- /usr/include/gsl/gsl_multilarge_nlinear.h:81
 
+  -- scaling matrix specification  
    type gsl_multilarge_nlinear_scale is record
       name : Interfaces.C.Strings.chars_ptr;  -- /usr/include/gsl/gsl_multilarge_nlinear.h:86
       init : access function (arg1 : access constant GSL.Low_Level.gsl_gsl_matrix_double_h.gsl_matrix; arg2 : access GSL.Low_Level.gsl_gsl_vector_double_h.gsl_vector) return int;  -- /usr/include/gsl/gsl_multilarge_nlinear.h:87
       update : access function (arg1 : access constant GSL.Low_Level.gsl_gsl_matrix_double_h.gsl_matrix; arg2 : access GSL.Low_Level.gsl_gsl_vector_double_h.gsl_vector) return int;  -- /usr/include/gsl/gsl_multilarge_nlinear.h:88
    end record
    with Convention => C_Pass_By_Copy;  -- /usr/include/gsl/gsl_multilarge_nlinear.h:89
+
+  -- * linear least squares solvers - there are three steps to
+  -- * solving a least squares problem using a direct method:
+  -- *
+  -- * 1. init: called once per iteration when a new Jacobian matrix
+  -- *          is required; form normal equations matrix J^T J
+  -- * 2. presolve: called each time a new LM parameter value mu is available;
+  -- *              used for cholesky method in order to factor
+  -- *              the (J^T J + mu D^T D) matrix
+  -- * 3. solve: solve the least square system for a given rhs
+  --  
 
    type gsl_multilarge_nlinear_solver is record
       name : Interfaces.C.Strings.chars_ptr;  -- /usr/include/gsl/gsl_multilarge_nlinear.h:104
@@ -97,6 +139,18 @@ package GSL.Low_Level.gsl_gsl_multilarge_nlinear_h is
    end record
    with Convention => C_Pass_By_Copy;  -- /usr/include/gsl/gsl_multilarge_nlinear.h:113
 
+  -- tunable parameters  
+  -- trust region subproblem method  
+  -- scaling method  
+  -- solver method  
+  -- finite difference method  
+  -- factor for increasing trust radius  
+  -- factor for decreasing trust radius  
+  -- max allowed |a|/|v|  
+  -- step size for finite difference Jacobian  
+  -- step size for finite difference fvv  
+  -- maximum iterations for trs method  
+  -- tolerance for solving trs  
    type gsl_multilarge_nlinear_parameters is record
       trs : access constant gsl_multilarge_nlinear_trs;  -- /usr/include/gsl/gsl_multilarge_nlinear.h:118
       scale : access constant gsl_multilarge_nlinear_scale;  -- /usr/include/gsl/gsl_multilarge_nlinear.h:119
@@ -148,6 +202,16 @@ package GSL.Low_Level.gsl_gsl_multilarge_nlinear_h is
    end record
    with Convention => C_Pass_By_Copy;  -- /usr/include/gsl/gsl_multilarge_nlinear.h:147
 
+  -- current state passed to low-level trust region algorithms  
+  -- parameter values x  
+  -- residual vector f(x)  
+  -- gradient J^T f  
+  -- matrix J^T J  
+  -- scaling matrix D  
+  -- sqrt(diag(W)) or NULL for unweighted  
+  -- LM parameter  
+  -- workspace for direct least squares solver  
+  -- |a| / |v|  
    type gsl_multilarge_nlinear_trust_state is record
       x : access constant GSL.Low_Level.gsl_gsl_vector_double_h.gsl_vector;  -- /usr/include/gsl/gsl_multilarge_nlinear.h:152
       f : access constant GSL.Low_Level.gsl_gsl_vector_double_h.gsl_vector;  -- /usr/include/gsl/gsl_multilarge_nlinear.h:153
@@ -163,6 +227,16 @@ package GSL.Low_Level.gsl_gsl_multilarge_nlinear_h is
    end record
    with Convention => C_Pass_By_Copy;  -- /usr/include/gsl/gsl_multilarge_nlinear.h:163
 
+  -- parameter values x  
+  -- residual vector f(x)  
+  -- step dx  
+  -- gradient J^T f  
+  -- matrix J^T J  
+  -- sqrt(W)  
+  -- ptr to sqrt_wts_work, or NULL if not using weights  
+  -- number of residuals  
+  -- number of parameters  
+  -- number of iterations performed  
    type gsl_multilarge_nlinear_workspace is record
       c_type : access constant gsl_multilarge_nlinear_type;  -- /usr/include/gsl/gsl_multilarge_nlinear.h:167
       fdf : access gsl_multilarge_nlinear_fdf;  -- /usr/include/gsl/gsl_multilarge_nlinear.h:168
@@ -321,6 +395,7 @@ package GSL.Low_Level.gsl_gsl_multilarge_nlinear_h is
         Convention => C, 
         External_Name => "gsl_multilarge_nlinear_eval_fvv";
 
+  -- convergence.c  
    function gsl_multilarge_nlinear_test
      (xtol : double;
       gtol : double;
@@ -331,6 +406,7 @@ package GSL.Low_Level.gsl_gsl_multilarge_nlinear_h is
         Convention => C, 
         External_Name => "gsl_multilarge_nlinear_test";
 
+  -- fdjac.c  
    function gsl_multilarge_nlinear_df
      (h : double;
       fdtype : gsl_multilarge_nlinear_fdtype;
@@ -344,6 +420,7 @@ package GSL.Low_Level.gsl_gsl_multilarge_nlinear_h is
         Convention => C, 
         External_Name => "gsl_multilarge_nlinear_df";
 
+  -- fdfvv.c  
    function gsl_multilarge_nlinear_fdfvv
      (h : double;
       x : access constant GSL.Low_Level.gsl_gsl_vector_double_h.gsl_vector;
@@ -358,11 +435,13 @@ package GSL.Low_Level.gsl_gsl_multilarge_nlinear_h is
         Convention => C, 
         External_Name => "gsl_multilarge_nlinear_fdfvv";
 
+  -- top-level algorithms  
    gsl_multilarge_nlinear_trust : access constant gsl_multilarge_nlinear_type  -- /usr/include/gsl/gsl_multilarge_nlinear.h:292
    with Import => True, 
         Convention => C, 
         External_Name => "gsl_multilarge_nlinear_trust";
 
+  -- trust region subproblem methods  
    gsl_multilarge_nlinear_trs_lm : access constant gsl_multilarge_nlinear_trs  -- /usr/include/gsl/gsl_multilarge_nlinear.h:295
    with Import => True, 
         Convention => C, 
@@ -393,6 +472,7 @@ package GSL.Low_Level.gsl_gsl_multilarge_nlinear_h is
         Convention => C, 
         External_Name => "gsl_multilarge_nlinear_trs_cgst";
 
+  -- scaling matrix strategies  
    gsl_multilarge_nlinear_scale_levenberg : access constant gsl_multilarge_nlinear_scale  -- /usr/include/gsl/gsl_multilarge_nlinear.h:303
    with Import => True, 
         Convention => C, 
@@ -408,6 +488,7 @@ package GSL.Low_Level.gsl_gsl_multilarge_nlinear_h is
         Convention => C, 
         External_Name => "gsl_multilarge_nlinear_scale_more";
 
+  -- linear solvers  
    gsl_multilarge_nlinear_solver_cholesky : access constant gsl_multilarge_nlinear_solver  -- /usr/include/gsl/gsl_multilarge_nlinear.h:308
    with Import => True, 
         Convention => C, 

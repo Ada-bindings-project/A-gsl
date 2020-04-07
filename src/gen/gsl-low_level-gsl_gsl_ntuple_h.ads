@@ -10,6 +10,27 @@ limited with GSL.Low_Level.gsl_gsl_histogram_h;
 
 package GSL.Low_Level.gsl_gsl_ntuple_h is
 
+  -- histogram/ntuple.h
+  -- * 
+  -- * Copyright (C) 2000 Simone Piccardi
+  -- * 
+  -- * This program is free software; you can redistribute it and/or modify
+  -- * it under the terms of the GNU General Public License as published by
+  -- * the Free Software Foundation; either version 3 of the License, or (at
+  -- * your option) any later version.
+  -- * 
+  -- * This program is distributed in the hope that it will be useful, but
+  -- * WITHOUT ANY WARRANTY; without even the implied warranty of
+  -- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+  -- * General Public License for more details.
+  -- * 
+  -- * You should have received a copy of the GNU General Public License
+  -- * along with this program; if not, write to the Free Software
+  -- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
+  -- *
+  --  
+
+  -- Jan/2001 Modified by Brian Gough. Minor changes for GSL  
    type gsl_ntuple is record
       the_file : access Interfaces.C_Streams.FILEs;  -- /usr/include/gsl/gsl_ntuple.h:44
       ntuple_data : System.Address;  -- /usr/include/gsl/gsl_ntuple.h:45
@@ -55,6 +76,7 @@ package GSL.Low_Level.gsl_gsl_ntuple_h is
         Convention => C, 
         External_Name => "gsl_ntuple_read";
 
+  -- synonym for write  
    function gsl_ntuple_bookdata (ntuple : access gsl_ntuple) return int  -- /usr/include/gsl/gsl_ntuple.h:68
    with Import => True, 
         Convention => C, 

@@ -9,6 +9,25 @@ with Interfaces.C.Strings;
 
 package GSL.Low_Level.gsl_gsl_vector_long_double_h is
 
+  -- vector/gsl_vector_long_double.h
+  -- * 
+  -- * Copyright (C) 1996, 1997, 1998, 1999, 2000, 2007 Gerard Jungman, Brian Gough
+  -- * 
+  -- * This program is free software; you can redistribute it and/or modify
+  -- * it under the terms of the GNU General Public License as published by
+  -- * the Free Software Foundation; either version 3 of the License, or (at
+  -- * your option) any later version.
+  -- * 
+  -- * This program is distributed in the hope that it will be useful, but
+  -- * WITHOUT ANY WARRANTY; without even the implied warranty of
+  -- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+  -- * General Public License for more details.
+  -- * 
+  -- * You should have received a copy of the GNU General Public License
+  -- * along with this program; if not, write to the Free Software
+  -- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
+  --  
+
    type gsl_vector_long_double is record
       size : aliased size_t;  -- /usr/include/gsl/gsl_vector_long_double.h:44
       stride : aliased size_t;  -- /usr/include/gsl/gsl_vector_long_double.h:45
@@ -32,6 +51,7 @@ package GSL.Low_Level.gsl_gsl_vector_long_double_h is
 
    subtype gsl_vector_long_double_const_view is u_gsl_vector_long_double_const_view;  -- /usr/include/gsl/gsl_vector_long_double.h:64
 
+  -- Allocation  
    function gsl_vector_long_double_alloc (arg1 : size_t) return access gsl_vector_long_double  -- /usr/include/gsl/gsl_vector_long_double.h:69
    with Import => True, 
         Convention => C, 
@@ -65,6 +85,7 @@ package GSL.Low_Level.gsl_gsl_vector_long_double_h is
         Convention => C, 
         External_Name => "gsl_vector_long_double_free";
 
+  -- Views  
    function gsl_vector_long_double_view_array (v : access long_double; n : size_t) return u_gsl_vector_long_double_view  -- /usr/include/gsl/gsl_vector_long_double.h:87
    with Import => True, 
         Convention => C, 
@@ -125,6 +146,7 @@ package GSL.Low_Level.gsl_gsl_vector_long_double_h is
         Convention => C, 
         External_Name => "gsl_vector_long_double_const_subvector_with_stride";
 
+  -- Operations  
    procedure gsl_vector_long_double_set_zero (v : access gsl_vector_long_double)  -- /usr/include/gsl/gsl_vector_long_double.h:126
    with Import => True, 
         Convention => C, 

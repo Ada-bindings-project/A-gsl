@@ -10,12 +10,37 @@ limited with GSL.Low_Level.gsl_gsl_vector_int_h;
 
 package GSL.Low_Level.gsl_gsl_filter_h is
 
+  -- filter/gsl_filter.h
+  -- * 
+  -- * Copyright (C) 2018 Patrick Alken
+  -- * 
+  -- * This program is free software; you can redistribute it and/or modify
+  -- * it under the terms of the GNU General Public License as published by
+  -- * the Free Software Foundation; either version 3 of the License, or (at
+  -- * your option) any later version.
+  -- * 
+  -- * This program is distributed in the hope that it will be useful, but
+  -- * WITHOUT ANY WARRANTY; without even the implied warranty of
+  -- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+  -- * General Public License for more details.
+  -- * 
+  -- * You should have received a copy of the GNU General Public License
+  -- * along with this program; if not, write to the Free Software
+  -- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
+  --  
+
+  -- end point handling methods  
    type gsl_filter_end_t is 
      (GSL_FILTER_END_PADZERO,
       GSL_FILTER_END_PADVALUE,
       GSL_FILTER_END_TRUNCATE)
    with Convention => C;  -- /usr/include/gsl/gsl_filter.h:45
 
+  -- robust scale estimates  
+  -- median absolute deviation  
+  -- interquartile range  
+  -- S_n scale statistic  
+  -- Q_n scale statistic  
    type gsl_filter_scale_t is 
      (GSL_FILTER_SCALE_MAD,
       GSL_FILTER_SCALE_IQR,
@@ -23,6 +48,9 @@ package GSL.Low_Level.gsl_gsl_filter_h is
       GSL_FILTER_SCALE_QN)
    with Convention => C;  -- /usr/include/gsl/gsl_filter.h:54
 
+  -- workspace for Gaussian filter  
+  -- window size  
+  -- Gaussian kernel, size K  
    type gsl_filter_gaussian_workspace is record
       K : aliased size_t;  -- /usr/include/gsl/gsl_filter.h:59
       kernel : access double;  -- /usr/include/gsl/gsl_filter.h:60
@@ -60,6 +88,7 @@ package GSL.Low_Level.gsl_gsl_filter_h is
         Convention => C, 
         External_Name => "gsl_filter_gaussian_kernel";
 
+  -- workspace for standard median filter  
    type gsl_filter_median_workspace is record
       movstat_workspace_p : access GSL.Low_Level.gsl_gsl_movstat_h.gsl_movstat_workspace;  -- /usr/include/gsl/gsl_filter.h:73
    end record
@@ -84,6 +113,12 @@ package GSL.Low_Level.gsl_gsl_filter_h is
         Convention => C, 
         External_Name => "gsl_filter_median";
 
+  -- workspace for recursive median filter  
+  -- window half-length (K / 2)  
+  -- window size  
+  -- workspace for min/max accumulator  
+  -- array holding first window  
+  -- minimum/maximum accumulator  
    type gsl_filter_rmedian_workspace is record
       H : aliased size_t;  -- /usr/include/gsl/gsl_filter.h:83
       K : aliased size_t;  -- /usr/include/gsl/gsl_filter.h:84

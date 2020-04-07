@@ -9,6 +9,32 @@ with Interfaces.C.Strings;
 
 package GSL.Low_Level.gsl_gsl_multifit_h is
 
+  -- multifit/gsl_multifit.h
+  -- * 
+  -- * Copyright (C) 2000, 2007, 2010 Brian Gough
+  -- * Copyright (C) 2013, Patrick Alken
+  -- * 
+  -- * This program is free software; you can redistribute it and/or modify
+  -- * it under the terms of the GNU General Public License as published by
+  -- * the Free Software Foundation; either version 3 of the License, or (at
+  -- * your option) any later version.
+  -- * 
+  -- * This program is distributed in the hope that it will be useful, but
+  -- * WITHOUT ANY WARRANTY; without even the implied warranty of
+  -- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+  -- * General Public License for more details.
+  -- * 
+  -- * You should have received a copy of the GNU General Public License
+  -- * along with this program; if not, write to the Free Software
+  -- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
+  --  
+
+  -- maximum number of observations  
+  -- maximum number of parameters  
+  -- number of observations in current SVD decomposition  
+  -- number of parameters in current SVD decomposition  
+  -- least squares matrix for SVD, n-by-p  
+  -- reciprocal condition number  
    type gsl_multifit_linear_workspace is record
       nmax : aliased size_t;  -- /usr/include/gsl/gsl_multifit.h:44
       pmax : aliased size_t;  -- /usr/include/gsl/gsl_multifit.h:45
@@ -317,6 +343,7 @@ package GSL.Low_Level.gsl_gsl_multifit_h is
         Convention => C, 
         External_Name => "gsl_multifit_linear_residuals";
 
+  -- gcv.c  
    function gsl_multifit_linear_gcv_init
      (y : access constant GSL.Low_Level.gsl_gsl_vector_double_h.gsl_vector;
       reg_param : access GSL.Low_Level.gsl_gsl_vector_double_h.gsl_vector;
@@ -368,6 +395,8 @@ package GSL.Low_Level.gsl_gsl_multifit_h is
         Convention => C, 
         External_Name => "gsl_multifit_linear_gcv";
 
+  -- method name  
+  -- default tuning constant  
    type gsl_multifit_robust_type is record
       name : Interfaces.C.Strings.chars_ptr;  -- /usr/include/gsl/gsl_multifit.h:299
       wfun : access function (arg1 : access constant GSL.Low_Level.gsl_gsl_vector_double_h.gsl_vector; arg2 : access GSL.Low_Level.gsl_gsl_vector_double_h.gsl_vector) return int;  -- /usr/include/gsl/gsl_multifit.h:300
@@ -376,6 +405,18 @@ package GSL.Low_Level.gsl_gsl_multifit_h is
    end record
    with Convention => C_Pass_By_Copy;  -- /usr/include/gsl/gsl_multifit.h:303
 
+  -- OLS estimate of sigma  
+  -- MAD estimate of sigma  
+  -- robust estimate of sigma  
+  -- final estimate of sigma  
+  -- R^2 coefficient of determination  
+  -- degree of freedom adjusted R^2  
+  -- root mean squared error  
+  -- residual sum of squares  
+  -- degrees of freedom  
+  -- number of iterations  
+  -- final weights  
+  -- final residuals y - X c  
    type gsl_multifit_robust_stats is record
       sigma_ols : aliased double;  -- /usr/include/gsl/gsl_multifit.h:307
       sigma_mad : aliased double;  -- /usr/include/gsl/gsl_multifit.h:308
@@ -392,6 +433,21 @@ package GSL.Low_Level.gsl_gsl_multifit_h is
    end record
    with Convention => C_Pass_By_Copy;  -- /usr/include/gsl/gsl_multifit.h:319
 
+  -- number of observations  
+  -- number of parameters  
+  -- number of iterations  
+  -- maximum iterations  
+  -- tuning parameter  
+  -- residuals at current iteration  
+  -- weights at current iteration  
+  -- coefficients from previous iteration  
+  -- multiplicative factors for residuals  
+  -- psi(r)  
+  -- psi'(r)  
+  -- Q S^{-1} of original matrix X  
+  -- balancing parameters of original matrix X  
+  -- workspace of length n  
+  -- various statistics  
    type gsl_multifit_robust_workspace is record
       n : aliased size_t;  -- /usr/include/gsl/gsl_multifit.h:323
       p : aliased size_t;  -- /usr/include/gsl/gsl_multifit.h:324
@@ -413,6 +469,7 @@ package GSL.Low_Level.gsl_gsl_multifit_h is
    end record
    with Convention => C_Pass_By_Copy;  -- /usr/include/gsl/gsl_multifit.h:346
 
+  -- available types  
    gsl_multifit_robust_default : access constant gsl_multifit_robust_type  -- /usr/include/gsl/gsl_multifit.h:349
    with Import => True, 
         Convention => C, 

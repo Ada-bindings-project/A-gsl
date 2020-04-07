@@ -6,6 +6,32 @@ with GSL.Low_Level.gsl_gsl_sf_result_h;
 
 package GSL.Low_Level.gsl_gsl_sf_trig_h is
 
+  -- specfunc/gsl_sf_trig.h
+  -- * 
+  -- * Copyright (C) 1996, 1997, 1998, 1999, 2000 Gerard Jungman
+  -- * 
+  -- * This program is free software; you can redistribute it and/or modify
+  -- * it under the terms of the GNU General Public License as published by
+  -- * the Free Software Foundation; either version 3 of the License, or (at
+  -- * your option) any later version.
+  -- * 
+  -- * This program is distributed in the hope that it will be useful, but
+  -- * WITHOUT ANY WARRANTY; without even the implied warranty of
+  -- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+  -- * General Public License for more details.
+  -- * 
+  -- * You should have received a copy of the GNU General Public License
+  -- * along with this program; if not, write to the Free Software
+  -- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
+  --  
+
+  -- Author:  G. Jungman  
+  -- Sin(x) with GSL semantics. This is actually important
+  -- * because we want to control the error estimate, and trying
+  -- * to guess the error for the standard library implementation
+  -- * every time it is used would be a little goofy.
+  --  
+
    function gsl_sf_sin_e (x : double; result : access GSL.Low_Level.gsl_gsl_sf_result_h.gsl_sf_result) return int  -- /usr/include/gsl/gsl_sf_trig.h:45
    with Import => True, 
         Convention => C, 
@@ -16,6 +42,9 @@ package GSL.Low_Level.gsl_gsl_sf_trig_h is
         Convention => C, 
         External_Name => "gsl_sf_sin";
 
+  -- Cos(x) with GSL semantics.
+  --  
+
    function gsl_sf_cos_e (x : double; result : access GSL.Low_Level.gsl_gsl_sf_result_h.gsl_sf_result) return int  -- /usr/include/gsl/gsl_sf_trig.h:51
    with Import => True, 
         Convention => C, 
@@ -25,6 +54,9 @@ package GSL.Low_Level.gsl_gsl_sf_trig_h is
    with Import => True, 
         Convention => C, 
         External_Name => "gsl_sf_cos";
+
+  -- Hypot(x,y) with GSL semantics.
+  --  
 
    function gsl_sf_hypot_e
      (x : double;
@@ -39,6 +71,11 @@ package GSL.Low_Level.gsl_gsl_sf_trig_h is
         Convention => C, 
         External_Name => "gsl_sf_hypot";
 
+  -- Sin(z) for complex z
+  -- *
+  -- * exceptions: GSL_EOVRFLW
+  --  
+
    function gsl_sf_complex_sin_e
      (zr : double;
       zi : double;
@@ -47,6 +84,11 @@ package GSL.Low_Level.gsl_gsl_sf_trig_h is
    with Import => True, 
         Convention => C, 
         External_Name => "gsl_sf_complex_sin_e";
+
+  -- Cos(z) for complex z
+  -- *
+  -- * exceptions: GSL_EOVRFLW
+  --  
 
    function gsl_sf_complex_cos_e
      (zr : double;
@@ -57,6 +99,11 @@ package GSL.Low_Level.gsl_gsl_sf_trig_h is
         Convention => C, 
         External_Name => "gsl_sf_complex_cos_e";
 
+  -- Log(Sin(z)) for complex z
+  -- *
+  -- * exceptions: GSL_EDOM, GSL_ELOSS
+  --  
+
    function gsl_sf_complex_logsin_e
      (zr : double;
       zi : double;
@@ -65,6 +112,11 @@ package GSL.Low_Level.gsl_gsl_sf_trig_h is
    with Import => True, 
         Convention => C, 
         External_Name => "gsl_sf_complex_logsin_e";
+
+  -- Sinc(x) = sin(pi x) / (pi x)
+  -- *
+  -- * exceptions: none
+  --  
 
    function gsl_sf_sinc_e (x : double; result : access GSL.Low_Level.gsl_gsl_sf_result_h.gsl_sf_result) return int  -- /usr/include/gsl/gsl_sf_trig.h:86
    with Import => True, 
@@ -76,6 +128,11 @@ package GSL.Low_Level.gsl_gsl_sf_trig_h is
         Convention => C, 
         External_Name => "gsl_sf_sinc";
 
+  -- Log(Sinh(x)), x > 0
+  -- *
+  -- * exceptions: GSL_EDOM
+  --  
+
    function gsl_sf_lnsinh_e (x : double; result : access GSL.Low_Level.gsl_gsl_sf_result_h.gsl_sf_result) return int  -- /usr/include/gsl/gsl_sf_trig.h:94
    with Import => True, 
         Convention => C, 
@@ -85,6 +142,11 @@ package GSL.Low_Level.gsl_gsl_sf_trig_h is
    with Import => True, 
         Convention => C, 
         External_Name => "gsl_sf_lnsinh";
+
+  -- Log(Cosh(x))
+  -- *
+  -- * exceptions: none
+  --  
 
    function gsl_sf_lncosh_e (x : double; result : access GSL.Low_Level.gsl_gsl_sf_result_h.gsl_sf_result) return int  -- /usr/include/gsl/gsl_sf_trig.h:102
    with Import => True, 
@@ -96,6 +158,11 @@ package GSL.Low_Level.gsl_gsl_sf_trig_h is
         Convention => C, 
         External_Name => "gsl_sf_lncosh";
 
+  -- Convert polar to rectlinear coordinates.
+  -- *
+  -- * exceptions: GSL_ELOSS
+  --  
+
    function gsl_sf_polar_to_rect
      (r : double;
       theta : double;
@@ -104,6 +171,12 @@ package GSL.Low_Level.gsl_gsl_sf_trig_h is
    with Import => True, 
         Convention => C, 
         External_Name => "gsl_sf_polar_to_rect";
+
+  -- Convert rectilinear to polar coordinates.
+  -- * return argument in range [-pi, pi]
+  -- *
+  -- * exceptions: GSL_EDOM
+  --  
 
    function gsl_sf_rect_to_polar
      (x : double;
@@ -114,6 +187,9 @@ package GSL.Low_Level.gsl_gsl_sf_trig_h is
         Convention => C, 
         External_Name => "gsl_sf_rect_to_polar";
 
+  -- Sin(x) for quantity with an associated error.
+  --  
+
    function gsl_sf_sin_err_e
      (x : double;
       dx : double;
@@ -122,6 +198,9 @@ package GSL.Low_Level.gsl_gsl_sf_trig_h is
         Convention => C, 
         External_Name => "gsl_sf_sin_err_e";
 
+  -- Cos(x) for quantity with an associated error.
+  --  
+
    function gsl_sf_cos_err_e
      (x : double;
       dx : double;
@@ -129,6 +208,11 @@ package GSL.Low_Level.gsl_gsl_sf_trig_h is
    with Import => True, 
         Convention => C, 
         External_Name => "gsl_sf_cos_err_e";
+
+  -- Force an angle to lie in the range (-pi,pi].
+  -- *
+  -- * exceptions: GSL_ELOSS
+  --  
 
    function gsl_sf_angle_restrict_symm_e (theta : access double) return int  -- /usr/include/gsl/gsl_sf_trig.h:133
    with Import => True, 
@@ -139,6 +223,11 @@ package GSL.Low_Level.gsl_gsl_sf_trig_h is
    with Import => True, 
         Convention => C, 
         External_Name => "gsl_sf_angle_restrict_symm";
+
+  -- Force an angle to lie in the range [0, 2pi)
+  -- *
+  -- * exceptions: GSL_ELOSS
+  --  
 
    function gsl_sf_angle_restrict_pos_e (theta : access double) return int  -- /usr/include/gsl/gsl_sf_trig.h:141
    with Import => True, 

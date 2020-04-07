@@ -9,6 +9,31 @@ package GSL.Low_Level.gsl_gsl_monte_h is
 
    --  arg-macro: function GSL_MONTE_FN_EVAL (F, x)
    --    return *((F).f))(x,(F).dim,(F).params;
+  -- monte/gsl_monte.h
+  -- * 
+  -- * Copyright (C) 1996, 1997, 1998, 1999, 2000 Michael Booth
+  -- * 
+  -- * This program is free software; you can redistribute it and/or modify
+  -- * it under the terms of the GNU General Public License as published by
+  -- * the Free Software Foundation; either version 3 of the License, or (at
+  -- * your option) any later version.
+  -- * 
+  -- * This program is distributed in the hope that it will be useful, but
+  -- * WITHOUT ANY WARRANTY; without even the implied warranty of
+  -- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+  -- * General Public License for more details.
+  -- * 
+  -- * You should have received a copy of the GNU General Public License
+  -- * along with this program; if not, write to the Free Software
+  -- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
+  --  
+
+  -- Some things common to all the Monte-Carlo implementations  
+  -- Author: MJB  
+  -- Hide the function type in a typedef so that we can use it in all our
+  --   integration functions, and make it easy to change things.
+  -- 
+
    type gsl_monte_function_struct is record
       f : access function
            (arg1 : access double;

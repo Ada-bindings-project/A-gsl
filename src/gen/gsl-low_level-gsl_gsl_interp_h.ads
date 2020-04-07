@@ -8,6 +8,31 @@ with System;
 
 package GSL.Low_Level.gsl_gsl_interp_h is
 
+  -- interpolation/gsl_interp.h
+  -- * 
+  -- * Copyright (C) 1996, 1997, 1998, 1999, 2000, 2004 Gerard Jungman
+  -- * 
+  -- * This program is free software; you can redistribute it and/or modify
+  -- * it under the terms of the GNU General Public License as published by
+  -- * the Free Software Foundation; either version 3 of the License, or (at
+  -- * your option) any later version.
+  -- * 
+  -- * This program is distributed in the hope that it will be useful, but
+  -- * WITHOUT ANY WARRANTY; without even the implied warranty of
+  -- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+  -- * General Public License for more details.
+  -- * 
+  -- * You should have received a copy of the GNU General Public License
+  -- * along with this program; if not, write to the Free Software
+  -- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
+  --  
+
+  -- Author:  G. Jungman
+  --  
+
+  -- evaluation accelerator  
+  -- cache of index    
+  -- keep statistics   
    type gsl_interp_accel is record
       cache : aliased size_t;  -- /usr/include/gsl/gsl_interp.h:42
       miss_count : aliased size_t;  -- /usr/include/gsl/gsl_interp.h:43
@@ -15,6 +40,7 @@ package GSL.Low_Level.gsl_gsl_interp_h is
    end record
    with Convention => C_Pass_By_Copy;  -- /usr/include/gsl/gsl_interp.h:46
 
+  -- interpolation object type  
    type gsl_interp_type is record
       name : Interfaces.C.Strings.chars_ptr;  -- /usr/include/gsl/gsl_interp.h:51
       min_size : aliased unsigned;  -- /usr/include/gsl/gsl_interp.h:52
@@ -61,6 +87,7 @@ package GSL.Low_Level.gsl_gsl_interp_h is
    end record
    with Convention => C_Pass_By_Copy;  -- /usr/include/gsl/gsl_interp.h:61
 
+  -- general interpolation object  
    type gsl_interp is record
       c_type : access constant gsl_interp_type;  -- /usr/include/gsl/gsl_interp.h:66
       xmin : aliased double;  -- /usr/include/gsl/gsl_interp.h:67
@@ -70,6 +97,7 @@ package GSL.Low_Level.gsl_gsl_interp_h is
    end record
    with Convention => C_Pass_By_Copy;  -- /usr/include/gsl/gsl_interp.h:71
 
+  -- available types  
    gsl_interp_linear : access constant gsl_interp_type  -- /usr/include/gsl/gsl_interp.h:75
    with Import => True, 
         Convention => C, 
@@ -248,6 +276,28 @@ package GSL.Low_Level.gsl_gsl_interp_h is
    with Import => True, 
         Convention => C, 
         External_Name => "gsl_interp_bsearch";
+
+  -- Perform a binary search of an array of values.
+  -- * 
+  -- * The parameters index_lo and index_hi provide an initial bracket,
+  -- * and it is assumed that index_lo < index_hi. The resulting index
+  -- * is guaranteed to be strictly less than index_hi and greater than
+  -- * or equal to index_lo, so that the implicit bracket [index, index+1]
+  -- * always corresponds to a region within the implicit value range of
+  -- * the value array.
+  -- *
+  -- * Note that this means the relationship of 'x' to x_array[index]
+  -- * and x_array[index+1] depends on the result region, i.e. the
+  -- * behaviour at the boundaries may not correspond to what you
+  -- * expect. We have the following complete specification of the
+  -- * behaviour.
+  -- * Suppose the input is x_array[] = { x0, x1, ..., xN }
+  -- *    if ( x == x0 )           then  index == 0
+  -- *    if ( x > x0 && x <= x1 ) then  index == 0, and sim. for other interior pts
+  -- *    if ( x == xN )           then  index == N-1
+  -- *    if ( x > xN )            then  index == N-1
+  -- *    if ( x < x0 )            then  index == 0 
+  --  
 
    function gsl_interp_accel_find
      (a : access gsl_interp_accel;

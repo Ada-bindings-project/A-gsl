@@ -32,6 +32,28 @@ package GSL.Low_Level.gsl_gsl_math_h is
    --  arg-macro: function GSL_FN_VEC_EVAL (F, x, y)
    --    return *((F).function))(x,y,(F).params;
 
+  -- gsl_math.h
+  -- * 
+  -- * Copyright (C) 1996, 1997, 1998, 1999, 2000, 2004, 2007 Gerard Jungman, Brian Gough
+  -- * 
+  -- * This program is free software; you can redistribute it and/or modify
+  -- * it under the terms of the GNU General Public License as published by
+  -- * the Free Software Foundation; either version 3 of the License, or (at
+  -- * your option) any later version.
+  -- * 
+  -- * This program is distributed in the hope that it will be useful, but
+  -- * WITHOUT ANY WARRANTY; without even the implied warranty of
+  -- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+  -- * General Public License for more details.
+  -- * 
+  -- * You should have received a copy of the GNU General Public License
+  -- * along with this program; if not, write to the Free Software
+  -- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
+  --  
+
+  -- other needlessly compulsive abstractions  
+  -- Return nonzero if x is a real number, i.e. non NaN or infinite.  
+  -- Definition of an arbitrary function with parameters  
    type gsl_function_struct is record
       c_function : access function (arg1 : double; arg2 : System.Address) return double;  -- /usr/include/gsl/gsl_math.h:125
       params : System.Address;  -- /usr/include/gsl/gsl_math.h:126
@@ -40,6 +62,7 @@ package GSL.Low_Level.gsl_gsl_math_h is
 
    subtype gsl_function is gsl_function_struct;  -- /usr/include/gsl/gsl_math.h:129
 
+  -- Definition of an arbitrary function returning two values, r1, r2  
    type gsl_function_fdf_struct is record
       f : access function (arg1 : double; arg2 : System.Address) return double;  -- /usr/include/gsl/gsl_math.h:137
       df : access function (arg1 : double; arg2 : System.Address) return double;  -- /usr/include/gsl/gsl_math.h:138
@@ -54,6 +77,7 @@ package GSL.Low_Level.gsl_gsl_math_h is
 
    subtype gsl_function_fdf is gsl_function_fdf_struct;  -- /usr/include/gsl/gsl_math.h:143
 
+  -- Definition of an arbitrary vector-valued function with parameters  
    type gsl_function_vec_struct is record
       c_function : access function
            (arg1 : double;

@@ -6,6 +6,39 @@ with Interfaces.C; use Interfaces.C;
 
 package GSL.Low_Level.gsl_gsl_sum_h is
 
+  -- sum/gsl_sum.h
+  -- * 
+  -- * Copyright (C) 1996, 1997, 1998, 1999, 2000, 2007 Gerard Jungman, Brian Gough
+  -- * 
+  -- * This program is free software; you can redistribute it and/or modify
+  -- * it under the terms of the GNU General Public License as published by
+  -- * the Free Software Foundation; either version 3 of the License, or (at
+  -- * your option) any later version.
+  -- * 
+  -- * This program is distributed in the hope that it will be useful, but
+  -- * WITHOUT ANY WARRANTY; without even the implied warranty of
+  -- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+  -- * General Public License for more details.
+  -- * 
+  -- * You should have received a copy of the GNU General Public License
+  -- * along with this program; if not, write to the Free Software
+  -- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
+  --  
+
+  -- Author:  G. Jungman  
+  --  Workspace for Levin U Transform with error estimation,
+  -- *   
+  -- *   size        = number of terms the workspace can handle
+  -- *   sum_plain   = simple sum of series
+  -- *   q_num       = backward diagonal of numerator; length = size
+  -- *   q_den       = backward diagonal of denominator; length = size
+  -- *   dq_num      = table of numerator derivatives; length = size**2
+  -- *   dq_den      = table of denominator derivatives; length = size**2
+  -- *   dsum        = derivative of sum wrt term i; length = size
+  --  
+
+  -- position in array  
+  -- number of calls  
    type gsl_sum_levin_u_workspace is record
       size : aliased size_t;  -- /usr/include/gsl/gsl_sum.h:53
       i : aliased size_t;  -- /usr/include/gsl/gsl_sum.h:54
@@ -29,6 +62,16 @@ package GSL.Low_Level.gsl_gsl_sum_h is
         Convention => C, 
         External_Name => "gsl_sum_levin_u_free";
 
+  -- Basic Levin-u acceleration method.
+  -- *
+  -- *   array       = array of series elements
+  -- *   n           = size of array
+  -- *   sum_accel   = result of summation acceleration
+  -- *   err         = estimated error   
+  -- *
+  -- * See [Fessler et al., ACM TOMS 9, 346 (1983) and TOMS-602]
+  --  
+
    function gsl_sum_levin_u_accel
      (c_array : access double;
       n : size_t;
@@ -38,6 +81,19 @@ package GSL.Low_Level.gsl_gsl_sum_h is
    with Import => True, 
         Convention => C, 
         External_Name => "gsl_sum_levin_u_accel";
+
+  -- Basic Levin-u acceleration method with constraints on the terms
+  -- * used,
+  -- *
+  -- *   array       = array of series elements
+  -- *   n           = size of array
+  -- *   min_terms   = minimum number of terms to sum
+  -- *   max_terms   = maximum number of terms to sum
+  -- *   sum_accel   = result of summation acceleration
+  -- *   err         = estimated error   
+  -- *
+  -- * See [Fessler et al., ACM TOMS 9, 346 (1983) and TOMS-602] 
+  --  
 
    function gsl_sum_levin_u_minmax
      (c_array : access double;
@@ -51,6 +107,18 @@ package GSL.Low_Level.gsl_gsl_sum_h is
         Convention => C, 
         External_Name => "gsl_sum_levin_u_minmax";
 
+  -- Basic Levin-u step w/o reference to the array of terms.
+  -- * We only need to specify the value of the current term
+  -- * to execute the step. See TOMS-745.
+  -- *
+  -- * sum = t0 + ... + t_{n-1} + term;  term = t_{n}
+  -- *
+  -- *   term   = value of the series term to be added
+  -- *   n      = position of term in series (starting from 0)
+  -- *   sum_accel = result of summation acceleration
+  -- *   sum_plain = simple sum of series
+  --  
+
    function gsl_sum_levin_u_step
      (term : double;
       n : size_t;
@@ -61,6 +129,14 @@ package GSL.Low_Level.gsl_gsl_sum_h is
         Convention => C, 
         External_Name => "gsl_sum_levin_u_step";
 
+  -- The following functions perform the same calculation without
+  --   estimating the errors. They require O(N) storage instead of O(N^2).
+  --   This may be useful for summing many similar series where the size
+  --   of the error has already been estimated reliably and is not
+  --   expected to change.   
+
+  -- position in array  
+  -- number of calls  
    type gsl_sum_levin_utrunc_workspace is record
       size : aliased size_t;  -- /usr/include/gsl/gsl_sum.h:130
       i : aliased size_t;  -- /usr/include/gsl/gsl_sum.h:131

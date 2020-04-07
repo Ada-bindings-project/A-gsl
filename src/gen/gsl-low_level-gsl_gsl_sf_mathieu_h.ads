@@ -12,6 +12,28 @@ package GSL.Low_Level.gsl_gsl_sf_mathieu_h is
 
    GSL_SF_MATHIEU_COEFF : constant := 100;  --  /usr/include/gsl/gsl_sf_mathieu.h:40
 
+  -- specfunc/gsl_sf_mathieu.h
+  -- * 
+  -- * Copyright (C) 2002 Lowell Johnson
+  -- * 
+  -- * This program is free software; you can redistribute it and/or modify
+  -- * it under the terms of the GNU General Public License as published by
+  -- * the Free Software Foundation; either version 3 of the License, or (at
+  -- * your option) any later version.
+  -- * 
+  -- * This program is distributed in the hope that it will be useful, but
+  -- * WITHOUT ANY WARRANTY; without even the implied warranty of
+  -- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+  -- * General Public License for more details.
+  -- * 
+  -- * You should have received a copy of the GNU General Public License
+  -- * along with this program; if not, write to the Free Software
+  -- * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+  --  
+
+  -- Author:  L. Johnson  
+  -- allow for caching of results: not implemented yet  
+  -- allow for caching of results: not implemented yet  
    type gsl_sf_mathieu_workspace is record
       size : aliased size_t;  -- /usr/include/gsl/gsl_sf_mathieu.h:44
       even_order : aliased size_t;  -- /usr/include/gsl/gsl_sf_mathieu.h:45
@@ -32,6 +54,9 @@ package GSL.Low_Level.gsl_gsl_sf_mathieu_h is
    end record
    with Convention => C_Pass_By_Copy;  -- /usr/include/gsl/gsl_sf_mathieu.h:60
 
+  -- Compute an array of characteristic (eigen) values from the recurrence
+  --   matrices for the Mathieu equations.  
+
    function gsl_sf_mathieu_a_array
      (order_min : int;
       order_max : int;
@@ -51,6 +76,9 @@ package GSL.Low_Level.gsl_gsl_sf_mathieu_h is
    with Import => True, 
         Convention => C, 
         External_Name => "gsl_sf_mathieu_b_array";
+
+  -- Compute the characteristic value for a Mathieu function of order n and
+  --   type ntype.  
 
    function gsl_sf_mathieu_a_e
      (order : int;
@@ -78,6 +106,7 @@ package GSL.Low_Level.gsl_gsl_sf_mathieu_h is
         Convention => C, 
         External_Name => "gsl_sf_mathieu_b";
 
+  -- Compute the Fourier coefficients for a Mathieu function.  
    function gsl_sf_mathieu_a_coeff
      (order : int;
       qq : double;
@@ -96,6 +125,7 @@ package GSL.Low_Level.gsl_gsl_sf_mathieu_h is
         Convention => C, 
         External_Name => "gsl_sf_mathieu_b_coeff";
 
+  -- Allocate computational storage space for eigenvalue solution.  
    function gsl_sf_mathieu_alloc (arg1 : size_t; arg2 : double) return access gsl_sf_mathieu_workspace  -- /usr/include/gsl/gsl_sf_mathieu.h:80
    with Import => True, 
         Convention => C, 
@@ -106,6 +136,7 @@ package GSL.Low_Level.gsl_gsl_sf_mathieu_h is
         Convention => C, 
         External_Name => "gsl_sf_mathieu_free";
 
+  -- Compute an angular Mathieu function.  
    function gsl_sf_mathieu_ce_e
      (order : int;
       qq : double;
@@ -162,6 +193,7 @@ package GSL.Low_Level.gsl_gsl_sf_mathieu_h is
         Convention => C, 
         External_Name => "gsl_sf_mathieu_se_array";
 
+  -- Compute a radial Mathieu function.  
    function gsl_sf_mathieu_Mc_e
      (kind : int;
       order : int;

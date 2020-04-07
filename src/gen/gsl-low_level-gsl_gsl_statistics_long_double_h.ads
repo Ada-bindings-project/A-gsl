@@ -6,6 +6,25 @@ with Interfaces.C; use Interfaces.C;
 
 package GSL.Low_Level.gsl_gsl_statistics_long_double_h is
 
+  -- statistics/gsl_statistics_long_double.h
+  -- * 
+  -- * Copyright (C) 1996, 1997, 1998, 1999, 2000, 2007 Jim Davies, Brian Gough
+  -- * 
+  -- * This program is free software; you can redistribute it and/or modify
+  -- * it under the terms of the GNU General Public License as published by
+  -- * the Free Software Foundation; either version 3 of the License, or (at
+  -- * your option) any later version.
+  -- * 
+  -- * This program is distributed in the hope that it will be useful, but
+  -- * WITHOUT ANY WARRANTY; without even the implied warranty of
+  -- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+  -- * General Public License for more details.
+  -- * 
+  -- * You should have received a copy of the GNU General Public License
+  -- * along with this program; if not, write to the Free Software
+  -- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
+  --  
+
    function gsl_stats_long_double_mean
      (data : access long_double;
       stride : size_t;
@@ -196,6 +215,7 @@ package GSL.Low_Level.gsl_gsl_statistics_long_double_h is
         Convention => C, 
         External_Name => "gsl_stats_long_double_covariance_m";
 
+  -- DEFINED FOR FLOATING POINT TYPES ONLY  
    function gsl_stats_long_double_wmean
      (w : access long_double;
       wstride : size_t;
@@ -356,6 +376,7 @@ package GSL.Low_Level.gsl_gsl_statistics_long_double_h is
         Convention => C, 
         External_Name => "gsl_stats_long_double_wkurtosis_m_sd";
 
+  -- END OF FLOATING POINT TYPES  
    function gsl_stats_long_double_pvariance
      (data1 : access long_double;
       stride1 : size_t;

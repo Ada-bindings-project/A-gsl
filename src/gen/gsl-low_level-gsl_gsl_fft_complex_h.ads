@@ -8,6 +8,26 @@ with GSL.Low_Level.gsl_gsl_fft_h;
 
 package GSL.Low_Level.gsl_gsl_fft_complex_h is
 
+  -- fft/gsl_fft_complex.h
+  -- * 
+  -- * Copyright (C) 1996, 1997, 1998, 1999, 2000, 2007 Brian Gough
+  -- * 
+  -- * This program is free software; you can redistribute it and/or modify
+  -- * it under the terms of the GNU General Public License as published by
+  -- * the Free Software Foundation; either version 3 of the License, or (at
+  -- * your option) any later version.
+  -- * 
+  -- * This program is distributed in the hope that it will be useful, but
+  -- * WITHOUT ANY WARRANTY; without even the implied warranty of
+  -- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+  -- * General Public License for more details.
+  -- * 
+  -- * You should have received a copy of the GNU General Public License
+  -- * along with this program; if not, write to the Free Software
+  -- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
+  --  
+
+  --  Power of 2 routines   
    function gsl_fft_complex_radix2_forward
      (data : GSL.Low_Level.gsl_gsl_complex_h.gsl_complex_packed_array;
       stride : size_t;
@@ -74,6 +94,7 @@ package GSL.Low_Level.gsl_gsl_fft_complex_h is
         Convention => C, 
         External_Name => "gsl_fft_complex_radix2_dif_transform";
 
+  --  Mixed Radix general-N routines   
    type gsl_fft_complex_wavetable_array5669 is array (0 .. 63) of aliased size_t;
    type gsl_fft_complex_wavetable_array5671 is array (0 .. 63) of access GSL.Low_Level.gsl_gsl_complex_h.gsl_complex;
    type gsl_fft_complex_wavetable is record

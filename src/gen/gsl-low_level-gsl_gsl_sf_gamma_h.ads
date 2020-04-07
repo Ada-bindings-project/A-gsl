@@ -12,6 +12,34 @@ package GSL.Low_Level.gsl_gsl_sf_gamma_h is
 
    GSL_SF_DOUBLEFACT_NMAX : constant := 297;  --  /usr/include/gsl/gsl_sf_gamma.h:289
 
+  -- specfunc/gsl_sf_gamma.h
+  -- * 
+  -- * Copyright (C) 1996, 1997, 1998, 1999, 2000 Gerard Jungman
+  -- * 
+  -- * This program is free software; you can redistribute it and/or modify
+  -- * it under the terms of the GNU General Public License as published by
+  -- * the Free Software Foundation; either version 3 of the License, or (at
+  -- * your option) any later version.
+  -- * 
+  -- * This program is distributed in the hope that it will be useful, but
+  -- * WITHOUT ANY WARRANTY; without even the implied warranty of
+  -- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+  -- * General Public License for more details.
+  -- * 
+  -- * You should have received a copy of the GNU General Public License
+  -- * along with this program; if not, write to the Free Software
+  -- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
+  --  
+
+  -- Author:  G. Jungman  
+  -- Log[Gamma(x)], x not a negative integer
+  -- * Uses real Lanczos method.
+  -- * Returns the real part of Log[Gamma[x]] when x < 0,
+  -- * i.e. Log[|Gamma[x]|].
+  -- *
+  -- * exceptions: GSL_EDOM, GSL_EROUND
+  --  
+
    function gsl_sf_lngamma_e (x : double; result : access GSL.Low_Level.gsl_gsl_sf_result_h.gsl_sf_result) return int  -- /usr/include/gsl/gsl_sf_gamma.h:47
    with Import => True, 
         Convention => C, 
@@ -22,6 +50,14 @@ package GSL.Low_Level.gsl_gsl_sf_gamma_h is
         Convention => C, 
         External_Name => "gsl_sf_lngamma";
 
+  -- Log[Gamma(x)], x not a negative integer
+  -- * Uses real Lanczos method. Determines
+  -- * the sign of Gamma[x] as well as Log[|Gamma[x]|] for x < 0.
+  -- * So Gamma[x] = sgn * Exp[result_lg].
+  -- *
+  -- * exceptions: GSL_EDOM, GSL_EROUND
+  --  
+
    function gsl_sf_lngamma_sgn_e
      (x : double;
       result_lg : access GSL.Low_Level.gsl_gsl_sf_result_h.gsl_sf_result;
@@ -29,6 +65,12 @@ package GSL.Low_Level.gsl_gsl_sf_gamma_h is
    with Import => True, 
         Convention => C, 
         External_Name => "gsl_sf_lngamma_sgn_e";
+
+  -- Gamma(x), x not a negative integer
+  -- * Uses real Lanczos method.
+  -- *
+  -- * exceptions: GSL_EDOM, GSL_EOVRFLW, GSL_EROUND
+  --  
 
    function gsl_sf_gamma_e (x : double; result : access GSL.Low_Level.gsl_gsl_sf_result_h.gsl_sf_result) return int  -- /usr/include/gsl/gsl_sf_gamma.h:66
    with Import => True, 
@@ -40,6 +82,14 @@ package GSL.Low_Level.gsl_gsl_sf_gamma_h is
         Convention => C, 
         External_Name => "gsl_sf_gamma";
 
+  -- Regulated Gamma Function, x > 0
+  -- * Gamma^*(x) = Gamma(x)/(Sqrt[2Pi] x^(x-1/2) exp(-x))
+  -- *            = (1 + 1/(12x) + ...),  x->Inf
+  -- * A useful suggestion of Temme.
+  -- *
+  -- * exceptions: GSL_EDOM
+  --  
+
    function gsl_sf_gammastar_e (x : double; result : access GSL.Low_Level.gsl_gsl_sf_result_h.gsl_sf_result) return int  -- /usr/include/gsl/gsl_sf_gamma.h:77
    with Import => True, 
         Convention => C, 
@@ -49,6 +99,12 @@ package GSL.Low_Level.gsl_gsl_sf_gamma_h is
    with Import => True, 
         Convention => C, 
         External_Name => "gsl_sf_gammastar";
+
+  -- 1/Gamma(x)
+  -- * Uses real Lanczos method.
+  -- *
+  -- * exceptions: GSL_EUNDRFLW, GSL_EROUND
+  --  
 
    function gsl_sf_gammainv_e (x : double; result : access GSL.Low_Level.gsl_gsl_sf_result_h.gsl_sf_result) return int  -- /usr/include/gsl/gsl_sf_gamma.h:86
    with Import => True, 
@@ -60,6 +116,20 @@ package GSL.Low_Level.gsl_gsl_sf_gamma_h is
         Convention => C, 
         External_Name => "gsl_sf_gammainv";
 
+  -- Log[Gamma(z)] for z complex, z not a negative integer
+  -- * Uses complex Lanczos method. Note that the phase part (arg)
+  -- * is not well-determined when |z| is very large, due
+  -- * to inevitable roundoff in restricting to (-Pi,Pi].
+  -- * This will raise the GSL_ELOSS exception when it occurs.
+  -- * The absolute value part (lnr), however, never suffers.
+  -- *
+  -- * Calculates:
+  -- *   lnr = log|Gamma(z)|
+  -- *   arg = arg(Gamma(z))  in (-Pi, Pi]
+  -- *
+  -- * exceptions: GSL_EDOM, GSL_ELOSS
+  --  
+
    function gsl_sf_lngamma_complex_e
      (zr : double;
       zi : double;
@@ -68,6 +138,12 @@ package GSL.Low_Level.gsl_gsl_sf_gamma_h is
    with Import => True, 
         Convention => C, 
         External_Name => "gsl_sf_lngamma_complex_e";
+
+  -- x^n / n!
+  -- *
+  -- * x >= 0.0, n >= 0
+  -- * exceptions: GSL_EDOM, GSL_EOVRFLW, GSL_EUNDRFLW
+  --  
 
    function gsl_sf_taylorcoeff_e
      (n : int;
@@ -82,6 +158,11 @@ package GSL.Low_Level.gsl_gsl_sf_gamma_h is
         Convention => C, 
         External_Name => "gsl_sf_taylorcoeff";
 
+  -- n!
+  -- *
+  -- * exceptions: GSL_EDOM, GSL_EOVRFLW
+  --  
+
    function gsl_sf_fact_e (n : unsigned; result : access GSL.Low_Level.gsl_gsl_sf_result_h.gsl_sf_result) return int  -- /usr/include/gsl/gsl_sf_gamma.h:119
    with Import => True, 
         Convention => C, 
@@ -91,6 +172,11 @@ package GSL.Low_Level.gsl_gsl_sf_gamma_h is
    with Import => True, 
         Convention => C, 
         External_Name => "gsl_sf_fact";
+
+  -- n!! = n(n-2)(n-4) ... 
+  -- *
+  -- * exceptions: GSL_EDOM, GSL_EOVRFLW
+  --  
 
    function gsl_sf_doublefact_e (n : unsigned; result : access GSL.Low_Level.gsl_gsl_sf_result_h.gsl_sf_result) return int  -- /usr/include/gsl/gsl_sf_gamma.h:127
    with Import => True, 
@@ -102,6 +188,12 @@ package GSL.Low_Level.gsl_gsl_sf_gamma_h is
         Convention => C, 
         External_Name => "gsl_sf_doublefact";
 
+  -- log(n!) 
+  -- * Faster than ln(Gamma(n+1)) for n < 170; defers for larger n.
+  -- *
+  -- * exceptions: none
+  --  
+
    function gsl_sf_lnfact_e (n : unsigned; result : access GSL.Low_Level.gsl_gsl_sf_result_h.gsl_sf_result) return int  -- /usr/include/gsl/gsl_sf_gamma.h:136
    with Import => True, 
         Convention => C, 
@@ -112,6 +204,11 @@ package GSL.Low_Level.gsl_gsl_sf_gamma_h is
         Convention => C, 
         External_Name => "gsl_sf_lnfact";
 
+  -- log(n!!) 
+  -- *
+  -- * exceptions: none
+  --  
+
    function gsl_sf_lndoublefact_e (n : unsigned; result : access GSL.Low_Level.gsl_gsl_sf_result_h.gsl_sf_result) return int  -- /usr/include/gsl/gsl_sf_gamma.h:144
    with Import => True, 
         Convention => C, 
@@ -121,6 +218,11 @@ package GSL.Low_Level.gsl_gsl_sf_gamma_h is
    with Import => True, 
         Convention => C, 
         External_Name => "gsl_sf_lndoublefact";
+
+  -- log(n choose m)
+  -- *
+  -- * exceptions: GSL_EDOM 
+  --  
 
    function gsl_sf_lnchoose_e
      (n : unsigned;
@@ -135,6 +237,11 @@ package GSL.Low_Level.gsl_gsl_sf_gamma_h is
         Convention => C, 
         External_Name => "gsl_sf_lnchoose";
 
+  -- n choose m
+  -- *
+  -- * exceptions: GSL_EDOM, GSL_EOVRFLW
+  --  
+
    function gsl_sf_choose_e
      (n : unsigned;
       m : unsigned;
@@ -147,6 +254,15 @@ package GSL.Low_Level.gsl_gsl_sf_gamma_h is
    with Import => True, 
         Convention => C, 
         External_Name => "gsl_sf_choose";
+
+  -- Logarithm of Pochhammer (Apell) symbol
+  -- *   log( (a)_x )
+  -- *   where (a)_x := Gamma[a + x]/Gamma[a]
+  -- *
+  -- * a > 0, a+x > 0
+  -- *
+  -- * exceptions:  GSL_EDOM
+  --  
 
    function gsl_sf_lnpoch_e
      (a : double;
@@ -161,6 +277,16 @@ package GSL.Low_Level.gsl_gsl_sf_gamma_h is
         Convention => C, 
         External_Name => "gsl_sf_lnpoch";
 
+  -- Logarithm of Pochhammer (Apell) symbol, with sign information.
+  -- *   result = log( |(a)_x| )
+  -- *   sgn    = sgn( (a)_x )
+  -- *   where (a)_x := Gamma[a + x]/Gamma[a]
+  -- *
+  -- * a != neg integer, a+x != neg integer
+  -- *
+  -- * exceptions:  GSL_EDOM
+  --  
+
    function gsl_sf_lnpoch_sgn_e
      (a : double;
       x : double;
@@ -169,6 +295,14 @@ package GSL.Low_Level.gsl_gsl_sf_gamma_h is
    with Import => True, 
         Convention => C, 
         External_Name => "gsl_sf_lnpoch_sgn_e";
+
+  -- Pochhammer (Apell) symbol
+  -- *   (a)_x := Gamma[a + x]/Gamma[x]
+  -- *
+  -- * a != neg integer, a+x != neg integer
+  -- *
+  -- * exceptions:  GSL_EDOM, GSL_EOVRFLW
+  --  
 
    function gsl_sf_poch_e
      (a : double;
@@ -183,6 +317,13 @@ package GSL.Low_Level.gsl_gsl_sf_gamma_h is
         Convention => C, 
         External_Name => "gsl_sf_poch";
 
+  -- Relative Pochhammer (Apell) symbol
+  -- *   ((a,x) - 1)/x
+  -- *   where (a,x) = (a)_x := Gamma[a + x]/Gamma[a]
+  -- *
+  -- * exceptions:  GSL_EDOM
+  --  
+
    function gsl_sf_pochrel_e
      (a : double;
       x : double;
@@ -195,6 +336,17 @@ package GSL.Low_Level.gsl_gsl_sf_gamma_h is
    with Import => True, 
         Convention => C, 
         External_Name => "gsl_sf_pochrel";
+
+  -- Normalized Incomplete Gamma Function
+  -- *
+  -- * Q(a,x) = 1/Gamma(a) Integral[ t^(a-1) e^(-t), {t,x,Infinity} ]
+  -- *
+  -- * a >= 0, x >= 0
+  -- *   Q(a,0) := 1
+  -- *   Q(0,x) := 0, x != 0
+  -- *
+  -- * exceptions: GSL_EDOM
+  --  
 
    function gsl_sf_gamma_inc_Q_e
      (a : double;
@@ -209,6 +361,15 @@ package GSL.Low_Level.gsl_gsl_sf_gamma_h is
         Convention => C, 
         External_Name => "gsl_sf_gamma_inc_Q";
 
+  -- Complementary Normalized Incomplete Gamma Function
+  -- *
+  -- * P(a,x) = 1/Gamma(a) Integral[ t^(a-1) e^(-t), {t,0,x} ]
+  -- *
+  -- * a > 0, x >= 0
+  -- *
+  -- * exceptions: GSL_EDOM
+  --  
+
    function gsl_sf_gamma_inc_P_e
      (a : double;
       x : double;
@@ -222,6 +383,16 @@ package GSL.Low_Level.gsl_gsl_sf_gamma_h is
         Convention => C, 
         External_Name => "gsl_sf_gamma_inc_P";
 
+  -- Non-normalized Incomplete Gamma Function
+  -- *
+  -- * Gamma(a,x) := Integral[ t^(a-1) e^(-t), {t,x,Infinity} ]
+  -- *
+  -- * x >= 0.0
+  -- *   Gamma(a, 0) := Gamma(a)
+  -- *
+  -- * exceptions: GSL_EDOM
+  --  
+
    function gsl_sf_gamma_inc_e
      (a : double;
       x : double;
@@ -234,6 +405,13 @@ package GSL.Low_Level.gsl_gsl_sf_gamma_h is
    with Import => True, 
         Convention => C, 
         External_Name => "gsl_sf_gamma_inc";
+
+  -- Logarithm of Beta Function
+  -- * Log[B(a,b)]
+  -- *
+  -- * a > 0, b > 0
+  -- * exceptions: GSL_EDOM
+  --  
 
    function gsl_sf_lnbeta_e
      (a : double;
@@ -257,6 +435,13 @@ package GSL.Low_Level.gsl_gsl_sf_gamma_h is
         Convention => C, 
         External_Name => "gsl_sf_lnbeta_sgn_e";
 
+  -- Beta Function
+  -- * B(a,b)
+  -- *
+  -- * a > 0, b > 0
+  -- * exceptions: GSL_EDOM, GSL_EOVRFLW, GSL_EUNDRFLW
+  --  
+
    function gsl_sf_beta_e
      (a : double;
       b : double;
@@ -269,6 +454,13 @@ package GSL.Low_Level.gsl_gsl_sf_gamma_h is
    with Import => True, 
         Convention => C, 
         External_Name => "gsl_sf_beta";
+
+  -- Normalized Incomplete Beta Function
+  -- * B_x(a,b)/B(a,b)
+  -- *
+  -- * a > 0, b > 0, 0 <= x <= 1
+  -- * exceptions: GSL_EDOM, GSL_EUNDRFLW
+  --  
 
    function gsl_sf_beta_inc_e
      (a : double;
@@ -287,4 +479,10 @@ package GSL.Low_Level.gsl_gsl_sf_gamma_h is
         Convention => C, 
         External_Name => "gsl_sf_beta_inc";
 
+  -- The maximum x such that gamma(x) is not
+  -- * considered an overflow.
+  --  
+
+  -- The maximum n such that gsl_sf_fact(n) does not give an overflow.  
+  -- The maximum n such that gsl_sf_doublefact(n) does not give an overflow.  
 end GSL.Low_Level.gsl_gsl_sf_gamma_h;
