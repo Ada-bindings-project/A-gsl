@@ -56,12 +56,12 @@ package GSL.Low_Level.gsl_gsl_ieee_utils_h is
         Convention => C, 
         External_Name => "gsl_ieee_printf_double";
 
-   procedure gsl_ieee_fprintf_float (stream : access Interfaces.C_Streams.FILEs; x : access float)  -- /usr/include/gsl/gsl_ieee_utils.h:62
+   procedure gsl_ieee_fprintf_float (stream : Interfaces.C_Streams.FILEs; x : access float)  -- /usr/include/gsl/gsl_ieee_utils.h:62
    with Import => True, 
         Convention => C, 
         External_Name => "gsl_ieee_fprintf_float";
 
-   procedure gsl_ieee_fprintf_double (stream : access Interfaces.C_Streams.FILEs; x : access double)  -- /usr/include/gsl/gsl_ieee_utils.h:63
+   procedure gsl_ieee_fprintf_double (stream : Interfaces.C_Streams.FILEs; x : access double)  -- /usr/include/gsl/gsl_ieee_utils.h:63
    with Import => True, 
         Convention => C, 
         External_Name => "gsl_ieee_fprintf_double";

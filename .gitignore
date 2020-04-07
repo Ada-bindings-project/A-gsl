@@ -6,3 +6,6 @@
 *-loc.xml
 *.cswi
 messages.txt
+*.bexch
+b__*
+*main

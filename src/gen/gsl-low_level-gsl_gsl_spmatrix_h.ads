@@ -233,24 +233,24 @@ package GSL.Low_Level.gsl_gsl_spmatrix_h is
 
   -- spio.c  
    function gsl_spmatrix_fprintf
-     (stream : access Interfaces.C_Streams.FILEs;
+     (stream : Interfaces.C_Streams.FILEs;
       m : access constant gsl_spmatrix;
       format : Interfaces.C.Strings.chars_ptr) return int  -- /usr/include/gsl/gsl_spmatrix.h:159
    with Import => True, 
         Convention => C, 
         External_Name => "gsl_spmatrix_fprintf";
 
-   function gsl_spmatrix_fscanf (arg1 : access Interfaces.C_Streams.FILEs) return access gsl_spmatrix  -- /usr/include/gsl/gsl_spmatrix.h:161
+   function gsl_spmatrix_fscanf (arg1 : Interfaces.C_Streams.FILEs) return access gsl_spmatrix  -- /usr/include/gsl/gsl_spmatrix.h:161
    with Import => True, 
         Convention => C, 
         External_Name => "gsl_spmatrix_fscanf";
 
-   function gsl_spmatrix_fwrite (stream : access Interfaces.C_Streams.FILEs; m : access constant gsl_spmatrix) return int  -- /usr/include/gsl/gsl_spmatrix.h:162
+   function gsl_spmatrix_fwrite (stream : Interfaces.C_Streams.FILEs; m : access constant gsl_spmatrix) return int  -- /usr/include/gsl/gsl_spmatrix.h:162
    with Import => True, 
         Convention => C, 
         External_Name => "gsl_spmatrix_fwrite";
 
-   function gsl_spmatrix_fread (stream : access Interfaces.C_Streams.FILEs; m : access gsl_spmatrix) return int  -- /usr/include/gsl/gsl_spmatrix.h:163
+   function gsl_spmatrix_fread (stream : Interfaces.C_Streams.FILEs; m : access gsl_spmatrix) return int  -- /usr/include/gsl/gsl_spmatrix.h:163
    with Import => True, 
         Convention => C, 
         External_Name => "gsl_spmatrix_fread";

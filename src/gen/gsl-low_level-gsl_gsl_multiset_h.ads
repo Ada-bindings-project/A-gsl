@@ -68,23 +68,23 @@ package GSL.Low_Level.gsl_gsl_multiset_h is
         Convention => C, 
         External_Name => "gsl_multiset_memcpy";
 
-   function gsl_multiset_fread (stream : access Interfaces.C_Streams.FILEs; c : access gsl_multiset) return int  -- /usr/include/gsl/gsl_multiset.h:59
+   function gsl_multiset_fread (stream : Interfaces.C_Streams.FILEs; c : access gsl_multiset) return int  -- /usr/include/gsl/gsl_multiset.h:59
    with Import => True, 
         Convention => C, 
         External_Name => "gsl_multiset_fread";
 
-   function gsl_multiset_fwrite (stream : access Interfaces.C_Streams.FILEs; c : access constant gsl_multiset) return int  -- /usr/include/gsl/gsl_multiset.h:60
+   function gsl_multiset_fwrite (stream : Interfaces.C_Streams.FILEs; c : access constant gsl_multiset) return int  -- /usr/include/gsl/gsl_multiset.h:60
    with Import => True, 
         Convention => C, 
         External_Name => "gsl_multiset_fwrite";
 
-   function gsl_multiset_fscanf (stream : access Interfaces.C_Streams.FILEs; c : access gsl_multiset) return int  -- /usr/include/gsl/gsl_multiset.h:61
+   function gsl_multiset_fscanf (stream : Interfaces.C_Streams.FILEs; c : access gsl_multiset) return int  -- /usr/include/gsl/gsl_multiset.h:61
    with Import => True, 
         Convention => C, 
         External_Name => "gsl_multiset_fscanf";
 
    function gsl_multiset_fprintf
-     (stream : access Interfaces.C_Streams.FILEs;
+     (stream : Interfaces.C_Streams.FILEs;
       c : access constant gsl_multiset;
       format : Interfaces.C.Strings.chars_ptr) return int  -- /usr/include/gsl/gsl_multiset.h:62
    with Import => True, 

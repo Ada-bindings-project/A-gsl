@@ -6,7 +6,7 @@ s-GSL.Low_Level.stddef_h.size_t-size_t-g
 
 s-limited with GSL.Low_Level.bits_types_FILE_h;-with Interfaces.C_Streams;-
 s-with GSL.Low_Level.bits_types_FILE_h;-with Interfaces.C_Streams;-
-s-GSL.Low_Level.bits_types_FILE_h.FILE-Interfaces.C_Streams.FILEs-g
+s-access GSL.Low_Level.bits_types_FILE_h.FILE-Interfaces.C_Streams.FILEs-g
 
 
 # Withs shall not be limited.

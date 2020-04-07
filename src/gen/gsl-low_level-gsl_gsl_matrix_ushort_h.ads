@@ -290,23 +290,23 @@ package GSL.Low_Level.gsl_gsl_matrix_ushort_h is
         Convention => C, 
         External_Name => "gsl_matrix_ushort_set_all";
 
-   function gsl_matrix_ushort_fread (stream : access Interfaces.C_Streams.FILEs; m : access gsl_matrix_ushort) return int  -- /usr/include/gsl/gsl_matrix_ushort.h:212
+   function gsl_matrix_ushort_fread (stream : Interfaces.C_Streams.FILEs; m : access gsl_matrix_ushort) return int  -- /usr/include/gsl/gsl_matrix_ushort.h:212
    with Import => True, 
         Convention => C, 
         External_Name => "gsl_matrix_ushort_fread";
 
-   function gsl_matrix_ushort_fwrite (stream : access Interfaces.C_Streams.FILEs; m : access constant gsl_matrix_ushort) return int  -- /usr/include/gsl/gsl_matrix_ushort.h:213
+   function gsl_matrix_ushort_fwrite (stream : Interfaces.C_Streams.FILEs; m : access constant gsl_matrix_ushort) return int  -- /usr/include/gsl/gsl_matrix_ushort.h:213
    with Import => True, 
         Convention => C, 
         External_Name => "gsl_matrix_ushort_fwrite";
 
-   function gsl_matrix_ushort_fscanf (stream : access Interfaces.C_Streams.FILEs; m : access gsl_matrix_ushort) return int  -- /usr/include/gsl/gsl_matrix_ushort.h:214
+   function gsl_matrix_ushort_fscanf (stream : Interfaces.C_Streams.FILEs; m : access gsl_matrix_ushort) return int  -- /usr/include/gsl/gsl_matrix_ushort.h:214
    with Import => True, 
         Convention => C, 
         External_Name => "gsl_matrix_ushort_fscanf";
 
    function gsl_matrix_ushort_fprintf
-     (stream : access Interfaces.C_Streams.FILEs;
+     (stream : Interfaces.C_Streams.FILEs;
       m : access constant gsl_matrix_ushort;
       format : Interfaces.C.Strings.chars_ptr) return int  -- /usr/include/gsl/gsl_matrix_ushort.h:215
    with Import => True, 

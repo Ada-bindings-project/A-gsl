@@ -32,7 +32,7 @@ package GSL.Low_Level.gsl_gsl_ntuple_h is
 
   -- Jan/2001 Modified by Brian Gough. Minor changes for GSL  
    type gsl_ntuple is record
-      the_file : access Interfaces.C_Streams.FILEs;  -- /usr/include/gsl/gsl_ntuple.h:44
+      the_file : Interfaces.C_Streams.FILEs;  -- /usr/include/gsl/gsl_ntuple.h:44
       ntuple_data : System.Address;  -- /usr/include/gsl/gsl_ntuple.h:45
       size : aliased size_t;  -- /usr/include/gsl/gsl_ntuple.h:46
    end record

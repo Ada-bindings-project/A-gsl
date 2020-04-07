@@ -50,23 +50,23 @@ package GSL.Low_Level.gsl_gsl_block_ushort_h is
         Convention => C, 
         External_Name => "gsl_block_ushort_free";
 
-   function gsl_block_ushort_fread (stream : access Interfaces.C_Streams.FILEs; b : access gsl_block_ushort) return int  -- /usr/include/gsl/gsl_block_ushort.h:50
+   function gsl_block_ushort_fread (stream : Interfaces.C_Streams.FILEs; b : access gsl_block_ushort) return int  -- /usr/include/gsl/gsl_block_ushort.h:50
    with Import => True, 
         Convention => C, 
         External_Name => "gsl_block_ushort_fread";
 
-   function gsl_block_ushort_fwrite (stream : access Interfaces.C_Streams.FILEs; b : access constant gsl_block_ushort) return int  -- /usr/include/gsl/gsl_block_ushort.h:51
+   function gsl_block_ushort_fwrite (stream : Interfaces.C_Streams.FILEs; b : access constant gsl_block_ushort) return int  -- /usr/include/gsl/gsl_block_ushort.h:51
    with Import => True, 
         Convention => C, 
         External_Name => "gsl_block_ushort_fwrite";
 
-   function gsl_block_ushort_fscanf (stream : access Interfaces.C_Streams.FILEs; b : access gsl_block_ushort) return int  -- /usr/include/gsl/gsl_block_ushort.h:52
+   function gsl_block_ushort_fscanf (stream : Interfaces.C_Streams.FILEs; b : access gsl_block_ushort) return int  -- /usr/include/gsl/gsl_block_ushort.h:52
    with Import => True, 
         Convention => C, 
         External_Name => "gsl_block_ushort_fscanf";
 
    function gsl_block_ushort_fprintf
-     (stream : access Interfaces.C_Streams.FILEs;
+     (stream : Interfaces.C_Streams.FILEs;
       b : access constant gsl_block_ushort;
       format : Interfaces.C.Strings.chars_ptr) return int  -- /usr/include/gsl/gsl_block_ushort.h:53
    with Import => True, 
@@ -74,7 +74,7 @@ package GSL.Low_Level.gsl_gsl_block_ushort_h is
         External_Name => "gsl_block_ushort_fprintf";
 
    function gsl_block_ushort_raw_fread
-     (stream : access Interfaces.C_Streams.FILEs;
+     (stream : Interfaces.C_Streams.FILEs;
       b : access unsigned_short;
       n : size_t;
       stride : size_t) return int  -- /usr/include/gsl/gsl_block_ushort.h:55
@@ -83,7 +83,7 @@ package GSL.Low_Level.gsl_gsl_block_ushort_h is
         External_Name => "gsl_block_ushort_raw_fread";
 
    function gsl_block_ushort_raw_fwrite
-     (stream : access Interfaces.C_Streams.FILEs;
+     (stream : Interfaces.C_Streams.FILEs;
       b : access unsigned_short;
       n : size_t;
       stride : size_t) return int  -- /usr/include/gsl/gsl_block_ushort.h:56
@@ -92,7 +92,7 @@ package GSL.Low_Level.gsl_gsl_block_ushort_h is
         External_Name => "gsl_block_ushort_raw_fwrite";
 
    function gsl_block_ushort_raw_fscanf
-     (stream : access Interfaces.C_Streams.FILEs;
+     (stream : Interfaces.C_Streams.FILEs;
       b : access unsigned_short;
       n : size_t;
       stride : size_t) return int  -- /usr/include/gsl/gsl_block_ushort.h:57
@@ -101,7 +101,7 @@ package GSL.Low_Level.gsl_gsl_block_ushort_h is
         External_Name => "gsl_block_ushort_raw_fscanf";
 
    function gsl_block_ushort_raw_fprintf
-     (stream : access Interfaces.C_Streams.FILEs;
+     (stream : Interfaces.C_Streams.FILEs;
       b : access unsigned_short;
       n : size_t;
       stride : size_t;

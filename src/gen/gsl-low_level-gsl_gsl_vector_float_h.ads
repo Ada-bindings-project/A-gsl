@@ -162,23 +162,23 @@ package GSL.Low_Level.gsl_gsl_vector_float_h is
         Convention => C, 
         External_Name => "gsl_vector_float_set_basis";
 
-   function gsl_vector_float_fread (stream : access Interfaces.C_Streams.FILEs; v : access gsl_vector_float) return int  -- /usr/include/gsl/gsl_vector_float.h:130
+   function gsl_vector_float_fread (stream : Interfaces.C_Streams.FILEs; v : access gsl_vector_float) return int  -- /usr/include/gsl/gsl_vector_float.h:130
    with Import => True, 
         Convention => C, 
         External_Name => "gsl_vector_float_fread";
 
-   function gsl_vector_float_fwrite (stream : access Interfaces.C_Streams.FILEs; v : access constant gsl_vector_float) return int  -- /usr/include/gsl/gsl_vector_float.h:131
+   function gsl_vector_float_fwrite (stream : Interfaces.C_Streams.FILEs; v : access constant gsl_vector_float) return int  -- /usr/include/gsl/gsl_vector_float.h:131
    with Import => True, 
         Convention => C, 
         External_Name => "gsl_vector_float_fwrite";
 
-   function gsl_vector_float_fscanf (stream : access Interfaces.C_Streams.FILEs; v : access gsl_vector_float) return int  -- /usr/include/gsl/gsl_vector_float.h:132
+   function gsl_vector_float_fscanf (stream : Interfaces.C_Streams.FILEs; v : access gsl_vector_float) return int  -- /usr/include/gsl/gsl_vector_float.h:132
    with Import => True, 
         Convention => C, 
         External_Name => "gsl_vector_float_fscanf";
 
    function gsl_vector_float_fprintf
-     (stream : access Interfaces.C_Streams.FILEs;
+     (stream : Interfaces.C_Streams.FILEs;
       v : access constant gsl_vector_float;
       format : Interfaces.C.Strings.chars_ptr) return int  -- /usr/include/gsl/gsl_vector_float.h:133
    with Import => True, 

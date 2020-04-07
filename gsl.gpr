@@ -10,6 +10,9 @@ project Gsl is
    package Compiler is
       for Default_Switches ("ada") use ("-gnatwa", "-gnatf", "-gnat05");
    end Compiler;
+   package Linker is
+      for Linker_Options use ("-lgsl", "-lgslcblas", "-lm");
+   end Linker;
 
 end Gsl;
 

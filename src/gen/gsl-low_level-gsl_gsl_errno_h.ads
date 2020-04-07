@@ -139,7 +139,7 @@ package GSL.Low_Level.gsl_gsl_errno_h is
         Convention => C, 
         External_Name => "gsl_set_stream_handler";
 
-   function gsl_set_stream (arg1 : access Interfaces.C_Streams.FILEs) return access Interfaces.C_Streams.FILEs  -- /usr/include/gsl/gsl_errno.h:100
+   function gsl_set_stream (arg1 : Interfaces.C_Streams.FILEs) return Interfaces.C_Streams.FILEs  -- /usr/include/gsl/gsl_errno.h:100
    with Import => True, 
         Convention => C, 
         External_Name => "gsl_set_stream";

@@ -65,7 +65,7 @@ package GSL.Low_Level.gsl_gsl_monte_vegas_h is
       it_num : aliased unsigned;  -- /usr/include/gsl/gsl_monte_vegas.h:83
       samples : aliased unsigned;  -- /usr/include/gsl/gsl_monte_vegas.h:84
       calls_per_box : aliased unsigned;  -- /usr/include/gsl/gsl_monte_vegas.h:85
-      ostream : access Interfaces.C_Streams.FILEs;  -- /usr/include/gsl/gsl_monte_vegas.h:87
+      ostream : Interfaces.C_Streams.FILEs;  -- /usr/include/gsl/gsl_monte_vegas.h:87
    end record
    with Convention => C_Pass_By_Copy;  -- /usr/include/gsl/gsl_monte_vegas.h:89
 
@@ -117,7 +117,7 @@ package GSL.Low_Level.gsl_gsl_monte_vegas_h is
       stage : aliased int;  -- /usr/include/gsl/gsl_monte_vegas.h:110
       mode : aliased int;  -- /usr/include/gsl/gsl_monte_vegas.h:111
       verbose : aliased int;  -- /usr/include/gsl/gsl_monte_vegas.h:112
-      ostream : access Interfaces.C_Streams.FILEs;  -- /usr/include/gsl/gsl_monte_vegas.h:113
+      ostream : Interfaces.C_Streams.FILEs;  -- /usr/include/gsl/gsl_monte_vegas.h:113
    end record
    with Convention => C_Pass_By_Copy;  -- /usr/include/gsl/gsl_monte_vegas.h:114
 

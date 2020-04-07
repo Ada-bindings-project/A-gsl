@@ -162,23 +162,23 @@ package GSL.Low_Level.gsl_gsl_vector_ushort_h is
         Convention => C, 
         External_Name => "gsl_vector_ushort_set_basis";
 
-   function gsl_vector_ushort_fread (stream : access Interfaces.C_Streams.FILEs; v : access gsl_vector_ushort) return int  -- /usr/include/gsl/gsl_vector_ushort.h:130
+   function gsl_vector_ushort_fread (stream : Interfaces.C_Streams.FILEs; v : access gsl_vector_ushort) return int  -- /usr/include/gsl/gsl_vector_ushort.h:130
    with Import => True, 
         Convention => C, 
         External_Name => "gsl_vector_ushort_fread";
 
-   function gsl_vector_ushort_fwrite (stream : access Interfaces.C_Streams.FILEs; v : access constant gsl_vector_ushort) return int  -- /usr/include/gsl/gsl_vector_ushort.h:131
+   function gsl_vector_ushort_fwrite (stream : Interfaces.C_Streams.FILEs; v : access constant gsl_vector_ushort) return int  -- /usr/include/gsl/gsl_vector_ushort.h:131
    with Import => True, 
         Convention => C, 
         External_Name => "gsl_vector_ushort_fwrite";
 
-   function gsl_vector_ushort_fscanf (stream : access Interfaces.C_Streams.FILEs; v : access gsl_vector_ushort) return int  -- /usr/include/gsl/gsl_vector_ushort.h:132
+   function gsl_vector_ushort_fscanf (stream : Interfaces.C_Streams.FILEs; v : access gsl_vector_ushort) return int  -- /usr/include/gsl/gsl_vector_ushort.h:132
    with Import => True, 
         Convention => C, 
         External_Name => "gsl_vector_ushort_fscanf";
 
    function gsl_vector_ushort_fprintf
-     (stream : access Interfaces.C_Streams.FILEs;
+     (stream : Interfaces.C_Streams.FILEs;
       v : access constant gsl_vector_ushort;
       format : Interfaces.C.Strings.chars_ptr) return int  -- /usr/include/gsl/gsl_vector_ushort.h:133
    with Import => True, 

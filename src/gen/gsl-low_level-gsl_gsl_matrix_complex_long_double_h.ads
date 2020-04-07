@@ -291,23 +291,23 @@ package GSL.Low_Level.gsl_gsl_matrix_complex_long_double_h is
         Convention => C, 
         External_Name => "gsl_matrix_complex_long_double_set_all";
 
-   function gsl_matrix_complex_long_double_fread (stream : access Interfaces.C_Streams.FILEs; m : access gsl_matrix_complex_long_double) return int  -- /usr/include/gsl/gsl_matrix_complex_long_double.h:212
+   function gsl_matrix_complex_long_double_fread (stream : Interfaces.C_Streams.FILEs; m : access gsl_matrix_complex_long_double) return int  -- /usr/include/gsl/gsl_matrix_complex_long_double.h:212
    with Import => True, 
         Convention => C, 
         External_Name => "gsl_matrix_complex_long_double_fread";
 
-   function gsl_matrix_complex_long_double_fwrite (stream : access Interfaces.C_Streams.FILEs; m : access constant gsl_matrix_complex_long_double) return int  -- /usr/include/gsl/gsl_matrix_complex_long_double.h:213
+   function gsl_matrix_complex_long_double_fwrite (stream : Interfaces.C_Streams.FILEs; m : access constant gsl_matrix_complex_long_double) return int  -- /usr/include/gsl/gsl_matrix_complex_long_double.h:213
    with Import => True, 
         Convention => C, 
         External_Name => "gsl_matrix_complex_long_double_fwrite";
 
-   function gsl_matrix_complex_long_double_fscanf (stream : access Interfaces.C_Streams.FILEs; m : access gsl_matrix_complex_long_double) return int  -- /usr/include/gsl/gsl_matrix_complex_long_double.h:214
+   function gsl_matrix_complex_long_double_fscanf (stream : Interfaces.C_Streams.FILEs; m : access gsl_matrix_complex_long_double) return int  -- /usr/include/gsl/gsl_matrix_complex_long_double.h:214
    with Import => True, 
         Convention => C, 
         External_Name => "gsl_matrix_complex_long_double_fscanf";
 
    function gsl_matrix_complex_long_double_fprintf
-     (stream : access Interfaces.C_Streams.FILEs;
+     (stream : Interfaces.C_Streams.FILEs;
       m : access constant gsl_matrix_complex_long_double;
       format : Interfaces.C.Strings.chars_ptr) return int  -- /usr/include/gsl/gsl_matrix_complex_long_double.h:215
    with Import => True, 

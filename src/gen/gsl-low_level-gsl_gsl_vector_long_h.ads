@@ -162,23 +162,23 @@ package GSL.Low_Level.gsl_gsl_vector_long_h is
         Convention => C, 
         External_Name => "gsl_vector_long_set_basis";
 
-   function gsl_vector_long_fread (stream : access Interfaces.C_Streams.FILEs; v : access gsl_vector_long) return int  -- /usr/include/gsl/gsl_vector_long.h:130
+   function gsl_vector_long_fread (stream : Interfaces.C_Streams.FILEs; v : access gsl_vector_long) return int  -- /usr/include/gsl/gsl_vector_long.h:130
    with Import => True, 
         Convention => C, 
         External_Name => "gsl_vector_long_fread";
 
-   function gsl_vector_long_fwrite (stream : access Interfaces.C_Streams.FILEs; v : access constant gsl_vector_long) return int  -- /usr/include/gsl/gsl_vector_long.h:131
+   function gsl_vector_long_fwrite (stream : Interfaces.C_Streams.FILEs; v : access constant gsl_vector_long) return int  -- /usr/include/gsl/gsl_vector_long.h:131
    with Import => True, 
         Convention => C, 
         External_Name => "gsl_vector_long_fwrite";
 
-   function gsl_vector_long_fscanf (stream : access Interfaces.C_Streams.FILEs; v : access gsl_vector_long) return int  -- /usr/include/gsl/gsl_vector_long.h:132
+   function gsl_vector_long_fscanf (stream : Interfaces.C_Streams.FILEs; v : access gsl_vector_long) return int  -- /usr/include/gsl/gsl_vector_long.h:132
    with Import => True, 
         Convention => C, 
         External_Name => "gsl_vector_long_fscanf";
 
    function gsl_vector_long_fprintf
-     (stream : access Interfaces.C_Streams.FILEs;
+     (stream : Interfaces.C_Streams.FILEs;
       v : access constant gsl_vector_long;
       format : Interfaces.C.Strings.chars_ptr) return int  -- /usr/include/gsl/gsl_vector_long.h:133
    with Import => True, 

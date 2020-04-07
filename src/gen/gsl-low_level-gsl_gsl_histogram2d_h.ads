@@ -289,18 +289,18 @@ package GSL.Low_Level.gsl_gsl_histogram2d_h is
         Convention => C, 
         External_Name => "gsl_histogram2d_shift";
 
-   function gsl_histogram2d_fwrite (stream : access Interfaces.C_Streams.FILEs; h : access constant gsl_histogram2d) return int  -- /usr/include/gsl/gsl_histogram2d.h:155
+   function gsl_histogram2d_fwrite (stream : Interfaces.C_Streams.FILEs; h : access constant gsl_histogram2d) return int  -- /usr/include/gsl/gsl_histogram2d.h:155
    with Import => True, 
         Convention => C, 
         External_Name => "gsl_histogram2d_fwrite";
 
-   function gsl_histogram2d_fread (stream : access Interfaces.C_Streams.FILEs; h : access gsl_histogram2d) return int  -- /usr/include/gsl/gsl_histogram2d.h:156
+   function gsl_histogram2d_fread (stream : Interfaces.C_Streams.FILEs; h : access gsl_histogram2d) return int  -- /usr/include/gsl/gsl_histogram2d.h:156
    with Import => True, 
         Convention => C, 
         External_Name => "gsl_histogram2d_fread";
 
    function gsl_histogram2d_fprintf
-     (stream : access Interfaces.C_Streams.FILEs;
+     (stream : Interfaces.C_Streams.FILEs;
       h : access constant gsl_histogram2d;
       range_format : Interfaces.C.Strings.chars_ptr;
       bin_format : Interfaces.C.Strings.chars_ptr) return int  -- /usr/include/gsl/gsl_histogram2d.h:157
@@ -308,7 +308,7 @@ package GSL.Low_Level.gsl_gsl_histogram2d_h is
         Convention => C, 
         External_Name => "gsl_histogram2d_fprintf";
 
-   function gsl_histogram2d_fscanf (stream : access Interfaces.C_Streams.FILEs; h : access gsl_histogram2d) return int  -- /usr/include/gsl/gsl_histogram2d.h:160
+   function gsl_histogram2d_fscanf (stream : Interfaces.C_Streams.FILEs; h : access gsl_histogram2d) return int  -- /usr/include/gsl/gsl_histogram2d.h:160
    with Import => True, 
         Convention => C, 
         External_Name => "gsl_histogram2d_fscanf";

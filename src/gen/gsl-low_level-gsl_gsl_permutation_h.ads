@@ -60,23 +60,23 @@ package GSL.Low_Level.gsl_gsl_permutation_h is
         Convention => C, 
         External_Name => "gsl_permutation_memcpy";
 
-   function gsl_permutation_fread (stream : access Interfaces.C_Streams.FILEs; p : access gsl_permutation) return int  -- /usr/include/gsl/gsl_permutation.h:55
+   function gsl_permutation_fread (stream : Interfaces.C_Streams.FILEs; p : access gsl_permutation) return int  -- /usr/include/gsl/gsl_permutation.h:55
    with Import => True, 
         Convention => C, 
         External_Name => "gsl_permutation_fread";
 
-   function gsl_permutation_fwrite (stream : access Interfaces.C_Streams.FILEs; p : access constant gsl_permutation) return int  -- /usr/include/gsl/gsl_permutation.h:56
+   function gsl_permutation_fwrite (stream : Interfaces.C_Streams.FILEs; p : access constant gsl_permutation) return int  -- /usr/include/gsl/gsl_permutation.h:56
    with Import => True, 
         Convention => C, 
         External_Name => "gsl_permutation_fwrite";
 
-   function gsl_permutation_fscanf (stream : access Interfaces.C_Streams.FILEs; p : access gsl_permutation) return int  -- /usr/include/gsl/gsl_permutation.h:57
+   function gsl_permutation_fscanf (stream : Interfaces.C_Streams.FILEs; p : access gsl_permutation) return int  -- /usr/include/gsl/gsl_permutation.h:57
    with Import => True, 
         Convention => C, 
         External_Name => "gsl_permutation_fscanf";
 
    function gsl_permutation_fprintf
-     (stream : access Interfaces.C_Streams.FILEs;
+     (stream : Interfaces.C_Streams.FILEs;
       p : access constant gsl_permutation;
       format : Interfaces.C.Strings.chars_ptr) return int  -- /usr/include/gsl/gsl_permutation.h:58
    with Import => True, 

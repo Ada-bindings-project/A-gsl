@@ -413,12 +413,12 @@ package GSL.Low_Level.gsl_gsl_rng_h is
         Convention => C, 
         External_Name => "gsl_rng_name";
 
-   function gsl_rng_fread (stream : access Interfaces.C_Streams.FILEs; r : access gsl_rng) return int  -- /usr/include/gsl/gsl_rng.h:141
+   function gsl_rng_fread (stream : Interfaces.C_Streams.FILEs; r : access gsl_rng) return int  -- /usr/include/gsl/gsl_rng.h:141
    with Import => True, 
         Convention => C, 
         External_Name => "gsl_rng_fread";
 
-   function gsl_rng_fwrite (stream : access Interfaces.C_Streams.FILEs; r : access constant gsl_rng) return int  -- /usr/include/gsl/gsl_rng.h:142
+   function gsl_rng_fwrite (stream : Interfaces.C_Streams.FILEs; r : access constant gsl_rng) return int  -- /usr/include/gsl/gsl_rng.h:142
    with Import => True, 
         Convention => C, 
         External_Name => "gsl_rng_fwrite";

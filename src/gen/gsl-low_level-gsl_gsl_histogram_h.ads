@@ -220,18 +220,18 @@ package GSL.Low_Level.gsl_gsl_histogram_h is
         Convention => C, 
         External_Name => "gsl_histogram_sum";
 
-   function gsl_histogram_fwrite (stream : access Interfaces.C_Streams.FILEs; h : access constant gsl_histogram) return int  -- /usr/include/gsl/gsl_histogram.h:121
+   function gsl_histogram_fwrite (stream : Interfaces.C_Streams.FILEs; h : access constant gsl_histogram) return int  -- /usr/include/gsl/gsl_histogram.h:121
    with Import => True, 
         Convention => C, 
         External_Name => "gsl_histogram_fwrite";
 
-   function gsl_histogram_fread (stream : access Interfaces.C_Streams.FILEs; h : access gsl_histogram) return int  -- /usr/include/gsl/gsl_histogram.h:122
+   function gsl_histogram_fread (stream : Interfaces.C_Streams.FILEs; h : access gsl_histogram) return int  -- /usr/include/gsl/gsl_histogram.h:122
    with Import => True, 
         Convention => C, 
         External_Name => "gsl_histogram_fread";
 
    function gsl_histogram_fprintf
-     (stream : access Interfaces.C_Streams.FILEs;
+     (stream : Interfaces.C_Streams.FILEs;
       h : access constant gsl_histogram;
       range_format : Interfaces.C.Strings.chars_ptr;
       bin_format : Interfaces.C.Strings.chars_ptr) return int  -- /usr/include/gsl/gsl_histogram.h:123
@@ -239,7 +239,7 @@ package GSL.Low_Level.gsl_gsl_histogram_h is
         Convention => C, 
         External_Name => "gsl_histogram_fprintf";
 
-   function gsl_histogram_fscanf (stream : access Interfaces.C_Streams.FILEs; h : access gsl_histogram) return int  -- /usr/include/gsl/gsl_histogram.h:125
+   function gsl_histogram_fscanf (stream : Interfaces.C_Streams.FILEs; h : access gsl_histogram) return int  -- /usr/include/gsl/gsl_histogram.h:125
    with Import => True, 
         Convention => C, 
         External_Name => "gsl_histogram_fscanf";

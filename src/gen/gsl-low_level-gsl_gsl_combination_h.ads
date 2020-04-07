@@ -67,23 +67,23 @@ package GSL.Low_Level.gsl_gsl_combination_h is
         Convention => C, 
         External_Name => "gsl_combination_memcpy";
 
-   function gsl_combination_fread (stream : access Interfaces.C_Streams.FILEs; c : access gsl_combination) return int  -- /usr/include/gsl/gsl_combination.h:58
+   function gsl_combination_fread (stream : Interfaces.C_Streams.FILEs; c : access gsl_combination) return int  -- /usr/include/gsl/gsl_combination.h:58
    with Import => True, 
         Convention => C, 
         External_Name => "gsl_combination_fread";
 
-   function gsl_combination_fwrite (stream : access Interfaces.C_Streams.FILEs; c : access constant gsl_combination) return int  -- /usr/include/gsl/gsl_combination.h:59
+   function gsl_combination_fwrite (stream : Interfaces.C_Streams.FILEs; c : access constant gsl_combination) return int  -- /usr/include/gsl/gsl_combination.h:59
    with Import => True, 
         Convention => C, 
         External_Name => "gsl_combination_fwrite";
 
-   function gsl_combination_fscanf (stream : access Interfaces.C_Streams.FILEs; c : access gsl_combination) return int  -- /usr/include/gsl/gsl_combination.h:60
+   function gsl_combination_fscanf (stream : Interfaces.C_Streams.FILEs; c : access gsl_combination) return int  -- /usr/include/gsl/gsl_combination.h:60
    with Import => True, 
         Convention => C, 
         External_Name => "gsl_combination_fscanf";
 
    function gsl_combination_fprintf
-     (stream : access Interfaces.C_Streams.FILEs;
+     (stream : Interfaces.C_Streams.FILEs;
       c : access constant gsl_combination;
       format : Interfaces.C.Strings.chars_ptr) return int  -- /usr/include/gsl/gsl_combination.h:61
    with Import => True, 

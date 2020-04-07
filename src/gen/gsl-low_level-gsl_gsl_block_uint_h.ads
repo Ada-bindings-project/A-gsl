@@ -50,23 +50,23 @@ package GSL.Low_Level.gsl_gsl_block_uint_h is
         Convention => C, 
         External_Name => "gsl_block_uint_free";
 
-   function gsl_block_uint_fread (stream : access Interfaces.C_Streams.FILEs; b : access gsl_block_uint) return int  -- /usr/include/gsl/gsl_block_uint.h:50
+   function gsl_block_uint_fread (stream : Interfaces.C_Streams.FILEs; b : access gsl_block_uint) return int  -- /usr/include/gsl/gsl_block_uint.h:50
    with Import => True, 
         Convention => C, 
         External_Name => "gsl_block_uint_fread";
 
-   function gsl_block_uint_fwrite (stream : access Interfaces.C_Streams.FILEs; b : access constant gsl_block_uint) return int  -- /usr/include/gsl/gsl_block_uint.h:51
+   function gsl_block_uint_fwrite (stream : Interfaces.C_Streams.FILEs; b : access constant gsl_block_uint) return int  -- /usr/include/gsl/gsl_block_uint.h:51
    with Import => True, 
         Convention => C, 
         External_Name => "gsl_block_uint_fwrite";
 
-   function gsl_block_uint_fscanf (stream : access Interfaces.C_Streams.FILEs; b : access gsl_block_uint) return int  -- /usr/include/gsl/gsl_block_uint.h:52
+   function gsl_block_uint_fscanf (stream : Interfaces.C_Streams.FILEs; b : access gsl_block_uint) return int  -- /usr/include/gsl/gsl_block_uint.h:52
    with Import => True, 
         Convention => C, 
         External_Name => "gsl_block_uint_fscanf";
 
    function gsl_block_uint_fprintf
-     (stream : access Interfaces.C_Streams.FILEs;
+     (stream : Interfaces.C_Streams.FILEs;
       b : access constant gsl_block_uint;
       format : Interfaces.C.Strings.chars_ptr) return int  -- /usr/include/gsl/gsl_block_uint.h:53
    with Import => True, 
@@ -74,7 +74,7 @@ package GSL.Low_Level.gsl_gsl_block_uint_h is
         External_Name => "gsl_block_uint_fprintf";
 
    function gsl_block_uint_raw_fread
-     (stream : access Interfaces.C_Streams.FILEs;
+     (stream : Interfaces.C_Streams.FILEs;
       b : access unsigned;
       n : size_t;
       stride : size_t) return int  -- /usr/include/gsl/gsl_block_uint.h:55
@@ -83,7 +83,7 @@ package GSL.Low_Level.gsl_gsl_block_uint_h is
         External_Name => "gsl_block_uint_raw_fread";
 
    function gsl_block_uint_raw_fwrite
-     (stream : access Interfaces.C_Streams.FILEs;
+     (stream : Interfaces.C_Streams.FILEs;
       b : access unsigned;
       n : size_t;
       stride : size_t) return int  -- /usr/include/gsl/gsl_block_uint.h:56
@@ -92,7 +92,7 @@ package GSL.Low_Level.gsl_gsl_block_uint_h is
         External_Name => "gsl_block_uint_raw_fwrite";
 
    function gsl_block_uint_raw_fscanf
-     (stream : access Interfaces.C_Streams.FILEs;
+     (stream : Interfaces.C_Streams.FILEs;
       b : access unsigned;
       n : size_t;
       stride : size_t) return int  -- /usr/include/gsl/gsl_block_uint.h:57
@@ -101,7 +101,7 @@ package GSL.Low_Level.gsl_gsl_block_uint_h is
         External_Name => "gsl_block_uint_raw_fscanf";
 
    function gsl_block_uint_raw_fprintf
-     (stream : access Interfaces.C_Streams.FILEs;
+     (stream : Interfaces.C_Streams.FILEs;
       b : access unsigned;
       n : size_t;
       stride : size_t;

@@ -290,23 +290,23 @@ package GSL.Low_Level.gsl_gsl_matrix_float_h is
         Convention => C, 
         External_Name => "gsl_matrix_float_set_all";
 
-   function gsl_matrix_float_fread (stream : access Interfaces.C_Streams.FILEs; m : access gsl_matrix_float) return int  -- /usr/include/gsl/gsl_matrix_float.h:212
+   function gsl_matrix_float_fread (stream : Interfaces.C_Streams.FILEs; m : access gsl_matrix_float) return int  -- /usr/include/gsl/gsl_matrix_float.h:212
    with Import => True, 
         Convention => C, 
         External_Name => "gsl_matrix_float_fread";
 
-   function gsl_matrix_float_fwrite (stream : access Interfaces.C_Streams.FILEs; m : access constant gsl_matrix_float) return int  -- /usr/include/gsl/gsl_matrix_float.h:213
+   function gsl_matrix_float_fwrite (stream : Interfaces.C_Streams.FILEs; m : access constant gsl_matrix_float) return int  -- /usr/include/gsl/gsl_matrix_float.h:213
    with Import => True, 
         Convention => C, 
         External_Name => "gsl_matrix_float_fwrite";
 
-   function gsl_matrix_float_fscanf (stream : access Interfaces.C_Streams.FILEs; m : access gsl_matrix_float) return int  -- /usr/include/gsl/gsl_matrix_float.h:214
+   function gsl_matrix_float_fscanf (stream : Interfaces.C_Streams.FILEs; m : access gsl_matrix_float) return int  -- /usr/include/gsl/gsl_matrix_float.h:214
    with Import => True, 
         Convention => C, 
         External_Name => "gsl_matrix_float_fscanf";
 
    function gsl_matrix_float_fprintf
-     (stream : access Interfaces.C_Streams.FILEs;
+     (stream : Interfaces.C_Streams.FILEs;
       m : access constant gsl_matrix_float;
       format : Interfaces.C.Strings.chars_ptr) return int  -- /usr/include/gsl/gsl_matrix_float.h:215
    with Import => True, 
