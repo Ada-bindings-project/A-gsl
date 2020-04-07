@@ -164,27 +164,4 @@ package GSL.Low_Level.gsl_gsl_sf_coupling_h is
   -- * exceptions: GSL_EDOM, GSL_EOVRFLW
   --  
 
-   function gsl_sf_coupling_6j_INCORRECT_e
-     (two_ja : int;
-      two_jb : int;
-      two_jc : int;
-      two_jd : int;
-      two_je : int;
-      two_jf : int;
-      result : access GSL.Low_Level.gsl_gsl_sf_result_h.gsl_sf_result) return int  -- /usr/include/gsl/gsl_sf_coupling.h:113
-   with Import => True, 
-        Convention => C, 
-        External_Name => "gsl_sf_coupling_6j_INCORRECT_e";
-
-   function gsl_sf_coupling_6j_INCORRECT
-     (two_ja : int;
-      two_jb : int;
-      two_jc : int;
-      two_jd : int;
-      two_je : int;
-      two_jf : int) return double  -- /usr/include/gsl/gsl_sf_coupling.h:117
-   with Import => True, 
-        Convention => C, 
-        External_Name => "gsl_sf_coupling_6j_INCORRECT";
-
 end GSL.Low_Level.gsl_gsl_sf_coupling_h;

@@ -27,20 +27,20 @@ package GSL.Low_Level.gsl_gsl_ieee_utils_h is
   --  
 
   -- Actual bits are 0..22, element 23 is \0  
-   subtype gsl_ieee_float_rep_array8278 is Interfaces.C.char_array (0 .. 23);
+   subtype gsl_ieee_float_rep_array8276 is Interfaces.C.char_array (0 .. 23);
    type gsl_ieee_float_rep is record
       sign : aliased int;  -- /usr/include/gsl/gsl_ieee_utils.h:45
-      mantissa : aliased gsl_ieee_float_rep_array8278;  -- /usr/include/gsl/gsl_ieee_utils.h:46
+      mantissa : aliased gsl_ieee_float_rep_array8276;  -- /usr/include/gsl/gsl_ieee_utils.h:46
       exponent : aliased int;  -- /usr/include/gsl/gsl_ieee_utils.h:47
       c_type : aliased int;  -- /usr/include/gsl/gsl_ieee_utils.h:48
    end record
    with Convention => C_Pass_By_Copy;  -- /usr/include/gsl/gsl_ieee_utils.h:49
 
   -- Actual bits are 0..51, element 52 is \0  
-   subtype gsl_ieee_double_rep_array8282 is Interfaces.C.char_array (0 .. 52);
+   subtype gsl_ieee_double_rep_array8280 is Interfaces.C.char_array (0 .. 52);
    type gsl_ieee_double_rep is record
       sign : aliased int;  -- /usr/include/gsl/gsl_ieee_utils.h:52
-      mantissa : aliased gsl_ieee_double_rep_array8282;  -- /usr/include/gsl/gsl_ieee_utils.h:53
+      mantissa : aliased gsl_ieee_double_rep_array8280;  -- /usr/include/gsl/gsl_ieee_utils.h:53
       exponent : aliased int;  -- /usr/include/gsl/gsl_ieee_utils.h:54
       c_type : aliased int;  -- /usr/include/gsl/gsl_ieee_utils.h:55
    end record
