@@ -4,11 +4,11 @@ project Gsl is
    for Object_Dir use ".obj";
 
    package Builder is
-      for Default_Switches ("ada") use ("-k", "-j3", "-s");
+      for Default_Switches ("ada") use ("-k", "-j0", "-s");
    end Builder;
 
    package Compiler is
-      for Default_Switches ("ada") use ("-gnatwa", "-gnatf", "-gnat05");
+      for Default_Switches ("ada") use ("-gnatwa", "-gnatf");
    end Compiler;
    package Linker is
       for Linker_Options use ("-lgsl", "-lgslcblas", "-lm");

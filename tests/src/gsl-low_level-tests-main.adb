@@ -8,15 +8,21 @@ procedure GSL.Low_Level.Tests.Main is
    use GSL.Low_Level.Gsl_Gsl_Block_Int_H;
    F       : aliased Interfaces.C_Streams.FILEs;
    Name    : aliased constant String := "test.data" & ASCII.NUL;
+   NameTxt : aliased constant String := "test.txt" & ASCII.NUL;
    Mode    : aliased constant String := "w" & ASCII.NUL;
    Result  : Interfaces.C_Streams.int;
    Block   : access Gsl_Block_Int := Gsl_Block_Int_Alloc (100);
    R       : Interfaces.C.int;
+   Format  : Interfaces.C.Strings.chars_ptr := Interfaces.C.Strings.New_String ("%d");
 begin
 
    Put_Line (Interfaces.C.Strings.Value (GSL.Low_Level.Gsl_Gsl_Version_H.Gsl_Version));
    F := Interfaces.C_Streams.Fopen (Name'Address, Mode'Address);
    R := Gsl_Block_Int_Fwrite (F, Block);
-
    Result := Interfaces.C_Streams.Fclose (F);
+
+   F := Interfaces.C_Streams.Fopen (NameTxt'Address, Mode'Address);
+   R := Gsl_Block_Int_Fprintf (F, Block, Format);
+   Result := Interfaces.C_Streams.Fclose (F);
+
 end GSL.Low_Level.Tests.Main;
