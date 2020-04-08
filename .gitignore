@@ -9,3 +9,7 @@ messages.txt
 *.bexch
 b__*
 *main
+/.obj/gnattest
+worker.*
+test.txt
+'
