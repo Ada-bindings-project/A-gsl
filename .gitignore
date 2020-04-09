@@ -12,4 +12,4 @@ b__*
 /.obj/gnattest
 worker.*
 test.txt
-'
+.#*#
